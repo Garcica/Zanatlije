@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+    <title>Zanatlije</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="main.js"></script>
+</head>
+<body>
+    <div class="top">
+        <div>
+            <a href="index.html"><h1>Zanatlije</h1></a>
+        </div>
+        <div class="reg">
+            <a href="login.html"><button type="button" name="prijava">PRIJAVA</button></a>
+            <a href="signup.html"><button type="button" name="registracija">REGISTRACIJA</button></a>
+        </div>
+    </div>
+    <div class="tip">
+        <button type="button" name="potrazioc" onclick="potrazioc()">POTRAZIOC</button>
+        <button type="button" name="zanatlija" onclick="zanatlija()">ZANATLIJA</button>
+    </div>
+    <div class="potrazioc">
+        <form>
+            <label>Ime: </label> <input type="text" required><br>
+            <label>Prezime: </label><input type="text" required><br>
+            <label>Korisnicko ime: </label><input type="text" required><br>
+            <label>Lozinka: </label><input type="password" required><br>
+            <label>Ponovljena Lozinka: </label><input type="password" required><br>
+            <label>Pol: </label><input type="radio" name="pol" checked>Muski <input type="radio" name="pol">Zenski<br>
+            <label>Mejl: </label><input type="email" required><br>
+            <label>Broj telefona: </label> <input type="tel" required><br>
+            <label>Opis: </label> <input type="textarea"><br>
+            <label>Adresa: </label> <input type="text" required><br>
+        </form>
+    </div>
+    <div class="zanatlija">
+        <form>
+            <label>Zanat: </label> <br>
+            <table>
+                <tr>
+                    <th><input type="checkbox">Automehanicar</th>
+                    <th><input type="checkbox">Stolar</th>
+                    <th><input type="checkbox">Elektricar</th>
+                    <th><input type="checkbox">Obucar</th>
+                    <th><input type="checkbox">Tasner</th>
+                </tr>
+                <tr>
+                    <th><input type="checkbox">Vodoinstalater</th>
+                    <th><input type="checkbox">Roletnar</th>
+                    <th><input type="checkbox">Moler</th>
+                    <th><input type="checkbox">Parketar</th>
+                    <th><input type="checkbox">Gipsar</th>
+                </tr>
+            </table><br>
+            <label>Ime firme: </label> <input type="text"><br>
+            <label>Adresa lokala: </label> <input type="text"><br>
+            <label>Slika: </label> <input type="file" required><br>
+        </form>
+    </div>
+        <div>
+            <button type="button" name="signup">Registruj se</button>
+        </div>
+</body>
+</html>
