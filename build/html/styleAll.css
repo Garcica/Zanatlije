@@ -1,0 +1,74 @@
+.navImg {
+    background-image: url("slike/NavImg.jpg");
+}
+
+body {
+    background-image: url("slike/BgImg.jpg");
+}
+
+.nav-link:link {
+    color: rgb(254, 206, 0);
+    background-color: black;
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+
+}
+
+.nav-link:visited {
+    background-color: black;
+    color: rgb(254, 206, 0);
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.nav-link:hover {
+    background-color: rgba(254, 207, 0, 0.589);
+    color: black;
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+
+}
+
+#active {
+    color: black;
+    font-weight: 600;
+    padding: 7px;
+    background-color: rgb(254, 206, 0);
+    border-radius: 5px;
+    margin: 5px;
+}
+
+label.btn  {
+    background-color: black;
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+
+}
+
+label.green:hover  {
+    background-color: #5cb85c6e;
+    color: white;
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+
+}
+
+label.red:hover  {
+    background-color: #d9544f75;
+    color: white;
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+
+}
