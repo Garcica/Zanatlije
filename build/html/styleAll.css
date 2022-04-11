@@ -72,3 +72,14 @@ label.red:hover  {
     margin: 5px;
 
 }
+
+label.gray:hover  {
+    background-color: #6c757d75
+    ;
+    color: white;
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+
+}
