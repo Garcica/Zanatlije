@@ -8,13 +8,6 @@ function zanatlijaReg() {
             form[i].style.display = "none";
         }
     }
-
-
-    if (checkBox.checked == true) {
-        document.getElementById('formaZanatlije').style.display = "block";
-    } else {
-        document.getElementById('formaZanatlije').style.display = "none";
-    }
 }
 
 function onChange(id) {
