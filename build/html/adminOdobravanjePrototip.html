@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Zanatlije Admin</title>
+    <title>Zanatlije Registracije</title>
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,10 +35,10 @@
                 <a class="nav-link" href="myPrototip.html">MOJ PROFIL</a>
             </li>
             <li class="nav-item">
-                <a id="active" class="nav-link" href="adminPrototip.html">ADMIN</a>
+                <a class="nav-link" href="adminPrototip.html">ADMIN</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="adminOdobravanjePrototip.html">REGISTRACIJE</a>
+                <a id="active" class="nav-link" href="adminOdobravanjePrototip.html">REGISTRACIJE</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="loginPrototip.html">ODJAVA</a>
@@ -54,46 +54,44 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Korisnicko ime</th>
-                    <th scope="col">Banuj</th>
-                    <th scope="col">Obrisi</th>
-                    <th scope="col">Dodaj/Ukloni moderatorske privilegije</th>
+                    <th scope="col">Odobri/Odbij</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th scope="row">1</th>
                     <td><a href="#">user1</a></td>
-                    <td><input type="date" class="datepicker" /><button type="button" class="btn btn-table">Banuj</button></td>
-                    <td><button type="button" class="btn btn-table">Obrisi</button></td>
-                    <td><button type="button" id="1" class="btn btn-table" value="Dodaj" onclick="onChange(1)">Dodaj</button></td>
+                    <td><button type="button" class="btn btn-table">Odobri</button>
+                        <button type="button" class="btn btn-table">Odbij</button>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">2</th>
                     <td><a href="#">user2</a></td>
-                    <td><input type="date" class="datepicker" /><button type="button" class="btn btn-table">Banuj</button></td>
-                    <td><button type="button" class="btn btn-table">Obrisi</button></td>
-                    <td><button type="button" id="2" class="btn btn-table" value="Dodaj" onclick="onChange(2)">Dodaj</button></td>
+                    <td><button type="button" class="btn btn-table">Odobri</button>
+                        <button type="button" class="btn btn-table">Odbij</button>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">3</th>
                     <td><a href="#">user3</a></td>
-                    <td><input type="date" class="datepicker" /><button type="button" class="btn btn-table">Banuj</button></td>
-                    <td><button type="button" class="btn btn-table">Obrisi</button></td>
-                    <td><button type="button" id="3" class="btn btn-table" value="Dodaj" onclick="onChange(3)">Dodaj</button></td>
+                    <td><button type="button" class="btn btn-table">Odobri</button>
+                        <button type="button" class="btn btn-table">Odbij</button>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">4</th>
                     <td><a href="#">user4</a></td>
-                    <td><input type="date" class="datepicker" /><button type="button" class="btn btn-table">Banuj</button></td>
-                    <td><button type="button" class="btn btn-table">Obrisi</button></td>
-                    <td><button type="button" id="4" class="btn btn-table" value="Dodaj" onclick="onChange(4)">Dodaj</button></td>
+                    <td><button type="button" class="btn btn-table">Odobri</button>
+                        <button type="button" class="btn btn-table">Odbij</button>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">5</th>
                     <td><a href="#">user5</a></td>
-                    <td><input type="date" class="datepicker" /><button type="button" class="btn btn-table">Banuj</button></td>
-                    <td><button type="button" class="btn btn-table">Obrisi</button></td>
-                    <td><button type="button" id="5" class="btn btn-table" value="Dodaj" onclick="onChange(5)">Dodaj</button></td>
+                    <td><button type="button" class="btn btn-table">Odobri</button>
+                        <button type="button" class="btn btn-table">Odbij</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
