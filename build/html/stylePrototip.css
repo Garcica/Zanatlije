@@ -1,0 +1,125 @@
+.navImg {
+    background-image: url("slike/NavImg.jpg");
+}
+
+body {
+    background-image: url("slike/BgImg.jpg");
+}
+
+.nav-link:link {
+    color: rgb(254, 206, 0);
+    background-color: black;
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.nav-link:visited {
+    background-color: black;
+    color: rgb(254, 206, 0);
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.nav-link:hover {
+    background-color: rgba(254, 207, 0, 0.589);
+    color: black;
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+#active {
+    color: black;
+    font-weight: 600;
+    padding: 7px;
+    background-color: rgb(254, 206, 0);
+    border-radius: 5px;
+    margin: 5px;
+}
+
+label.btn {
+    background-color: black;
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+label.green:hover {
+    background-color: #5cb85c6e;
+    color: white;
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+label.red:hover {
+    background-color: #d9544f75;
+    color: white;
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+label.gray:hover {
+    background-color: #6c757d75;
+    color: white;
+    font-weight: 600;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.table-container {
+    background-color: white;
+    margin-top: 7%;
+    padding: 4%;
+}
+
+.table td,
+.table th {
+    text-align: center;
+}
+
+.btn-table {
+    background-color: #bab1aa;
+}
+
+.datepicker {
+    margin-right: 10px;
+}
+
+.list-container {
+    background-color: white;
+    margin-top: 7%;
+    padding: 4%;
+}
+
+.btn-table-chats {
+    background-color: #bab1aa;
+    height: 60px;
+    font-size: 30px;
+}
+
+.profile-img {
+    height: 80px;
+    width: 80px;
+    margin-right: 30px;
+}
+
+.profile-link {
+    margin-right: 30px;
+    font-size: 30px;
+}
+
+.table>tbody>tr.no-border>td,
+.table>tbody>tr.no-border>th {
+    border: none;
+}

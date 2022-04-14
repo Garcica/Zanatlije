@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Zanatlije Admin</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="stylePrototip.css" rel="stylesheet">
+    <script type="text/javascript" src="skriptaPrototip.js"></script>
+</head>
+
+<body>
+
+    <!--NAVIGACIJA-->
+    <div class="container-fluid py-1 navImg"></div>
+    <nav class="navbar navbar-expand-sm bg-black p-0">
+        <a class="navbar-brand ms-1 me-0" href="index.html">
+            <img src="slike/Logo.png" alt="Logo.png" style="width:80px" title="Zanatlije">
+        </a>
+        <ul class="navbar-nav">
+            <li class="nav-right">
+                <a class="nav-link" href="searchLoggedPrototip.html">PRETRAGA</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="jobsPrototip.html">SARADNJE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="chatsPrototip.html">ĆASKANJA</a>
+            </li>
+            <li class="nav-right">
+                <a class="nav-link" href="myPrototip.html">MOJ PROFIL</a>
+            </li>
+            <li class="nav-item">
+                <a id="active" class="nav-link" href="adminPrototip.html">ADMIN</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="adminOdobravanjePrototip.html">REGISTRACIJE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="loginPrototip.html">ODJAVA</a>
+            </li>
+
+        </ul>
+    </nav>
+    <div class="container-fluid py-1 navImg"></div>
+
+    <div class="container table-container">
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Korisnicko ime</th>
+                    <th scope="col">Banuj</th>
+                    <th scope="col">Obrisi</th>
+                    <th scope="col">Dodaj/Ukloni moderatorske privilegije</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td><a href="#">user1</a></td>
+                    <td><input type="date" class="datepicker" /><button type="button" class="btn btn-table">Banuj</button></td>
+                    <td><button type="button" class="btn btn-table">Obrisi</button></td>
+                    <td><button type="button" id="1" class="btn btn-table" value="Dodaj" onclick="onChange(1)">Dodaj</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td><a href="#">user2</a></td>
+                    <td><input type="date" class="datepicker" /><button type="button" class="btn btn-table">Banuj</button></td>
+                    <td><button type="button" class="btn btn-table">Obrisi</button></td>
+                    <td><button type="button" id="2" class="btn btn-table" value="Dodaj" onclick="onChange(2)">Dodaj</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td><a href="#">user3</a></td>
+                    <td><input type="date" class="datepicker" /><button type="button" class="btn btn-table">Banuj</button></td>
+                    <td><button type="button" class="btn btn-table">Obrisi</button></td>
+                    <td><button type="button" id="3" class="btn btn-table" value="Dodaj" onclick="onChange(3)">Dodaj</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td><a href="#">user4</a></td>
+                    <td><input type="date" class="datepicker" /><button type="button" class="btn btn-table">Banuj</button></td>
+                    <td><button type="button" class="btn btn-table">Obrisi</button></td>
+                    <td><button type="button" id="4" class="btn btn-table" value="Dodaj" onclick="onChange(4)">Dodaj</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td><a href="#">user5</a></td>
+                    <td><input type="date" class="datepicker" /><button type="button" class="btn btn-table">Banuj</button></td>
+                    <td><button type="button" class="btn btn-table">Obrisi</button></td>
+                    <td><button type="button" id="5" class="btn btn-table" value="Dodaj" onclick="onChange(5)">Dodaj</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
