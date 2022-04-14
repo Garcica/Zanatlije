@@ -1,9 +1,12 @@
 function zanatlijaReg() {
     var checkBox = document.getElementById("btn-check-2-outlined");
-    
-    if (checkBox.checked == true){
-        document.getElementById('formaZanatlije').style.display = "block";
-    } else {
-        document.getElementById('formaZanatlije').style.display = "none";
+    var form = document.getElementsByClassName("formaZanatlije");
+    for(var i=0;i<form.length;i++){
+        if (checkBox.checked == true){
+            form[i].style.display="inline-block";
+        } else {
+            form[i].style.display="none";
+        }
     }
+    
 }
