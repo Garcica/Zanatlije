@@ -13,7 +13,6 @@ body {
     padding: 7px;
     border-radius: 5px;
     margin: 5px;
-
 }
 
 .nav-link:visited {
@@ -32,7 +31,6 @@ body {
     padding: 7px;
     border-radius: 5px;
     margin: 5px;
-
 }
 
 #active {
@@ -44,42 +42,227 @@ body {
     margin: 5px;
 }
 
-label.btn  {
+label.btn {
     background-color: black;
     font-weight: 600;
     padding: 7px;
     border-radius: 5px;
     margin: 5px;
-
 }
 
-label.green:hover  {
+label.green:hover {
     background-color: #5cb85c6e;
     color: white;
     font-weight: 600;
     padding: 7px;
     border-radius: 5px;
     margin: 5px;
-
 }
 
-label.red:hover  {
+label.red:hover {
     background-color: #d9544f75;
     color: white;
     font-weight: 600;
     padding: 7px;
     border-radius: 5px;
     margin: 5px;
-
 }
 
-label.gray:hover  {
-    background-color: #6c757d75
-    ;
+label.gray:hover {
+    background-color: #6c757d75;
     color: white;
     font-weight: 600;
     padding: 7px;
     border-radius: 5px;
     margin: 5px;
+}
 
+.kartica {
+    padding: 30px 0 40px;
+    margin-bottom: 30px;
+    background-color: rgb(254, 206, 0);
+    text-align: center;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    border: 5px solid rgb(254, 206, 0);
+}
+
+.kartica .picture {
+    display: inline-block;
+    height: 130px;
+    width: 130px;
+    margin-bottom: 20px;
+    z-index: 1;
+    position: relative;
+}
+
+.kartica .picture::before {
+    content: "";
+    width: 100%;
+    height: 0;
+    border-radius: 50%;
+    background-color: black;
+    position: absolute;
+    bottom: 135%;
+    right: 0;
+    left: 0;
+    transform: scale(3);
+    transition: all 0.3s linear 0s;
+}
+
+.kartica:hover .picture::before {
+    height: 100%;
+}
+
+.kartica .picture::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.kartica .picture img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: all 0.9s ease 0s;
+    border: 5px solid black;
+}
+
+.kartica:hover .picture img {
+    box-shadow: 0 0 0 14px rgb(254, 206, 0);
+    transform: scale(0.7);
+}
+
+.table-container {
+    background-color: white;
+    margin-top: 7%;
+    padding: 4%;
+}
+
+.table td,
+.table th {
+    text-align: center;
+}
+
+.btn-table {
+    background-color: #bab1aa;
+}
+
+.datepicker {
+    margin-right: 10px;
+}
+
+.list-container {
+    background-color: white;
+    margin-top: 7%;
+    padding: 4%;
+}
+
+.btn-table-chats {
+    background-color: #bab1aa;
+    height: 60px;
+    font-size: 30px;
+}
+
+.profile-img {
+    height: 80px;
+    width: 80px;
+    margin-right: 30px;
+}
+
+.profile-link {
+    margin-right: 30px;
+    font-size: 30px;
+}
+
+.table>tbody>tr.no-border>td,
+.table>tbody>tr.no-border>th {
+    border: none;
+}
+
+.photo {
+    width: 150px;
+    height: 150px;
+    border: 2px solid black;
+}
+
+.row {
+    margin-top: 5%;
+    background-color: black;
+    padding: 1%;
+}
+
+.col-12 {
+    background-color: #fece00;
+    color: black;
+}
+
+.round {
+    border-radius: 10px;
+}
+
+.profilButton {
+    color: purple;
+    border-color: purple;
+}
+
+.profilButton:hover {
+    color: white;
+    border-color: purple;
+    background-color: purple;
+}
+.modalButton {
+    color: white;
+    border-color: purple;
+    background-color: purple;
+}
+
+.modalButton:hover {
+    color: white;
+    border-color: purple;
+    background-color: rgb(83, 0, 83);
+}
+
+.modalButton:visited , modalButton:active , modalButton:link{
+    color: white;
+    border-color: purple;
+    background-color: purple;
+}
+
+.coms1 {
+    display: inline;
+    max-width: 20%;
+    margin-right: 2%;
+}
+
+.coms2 {
+    max-width: 78%;
+}
+
+.coms3 , .coms3:hover , .coms3:visited{
+    text-decoration: none;
+    color: black;
+    display: inline;
+}
+
+.small {
+    width: 50px;
+    height: 50px;
+}
+
+.checked {
+    color: orange;
+}
+
+.stars {
+    display: inline;
+    margin-top: -1rem;
 }
