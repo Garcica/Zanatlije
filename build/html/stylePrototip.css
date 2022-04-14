@@ -77,6 +77,7 @@ label.gray:hover {
     margin: 5px;
 }
 
+<<<<<<< HEAD
 .kartica {
     padding: 30px 0 40px;
     margin-bottom: 30px;
@@ -186,4 +187,85 @@ label.gray:hover {
 .table>tbody>tr.no-border>td,
 .table>tbody>tr.no-border>th {
     border: none;
+=======
+}
+
+.photo {
+    width: 150px;
+    height: 150px;
+    border: 2px solid black;
+}
+
+.row {
+    margin-top: 5%;
+    background-color: black;
+    padding: 1%;
+}
+
+.col-12 {
+    background-color: #fece00;
+    color: black;
+}
+
+.round {
+    border-radius: 10px;
+}
+
+.profilButton {
+    color: purple;
+    border-color: purple;
+}
+
+.profilButton:hover {
+    color: white;
+    border-color: purple;
+    background-color: purple;
+}
+.modalButton {
+    color: white;
+    border-color: purple;
+    background-color: purple;
+}
+
+.modalButton:hover {
+    color: white;
+    border-color: purple;
+    background-color: rgb(83, 0, 83);
+}
+
+.modalButton:visited , modalButton:active , modalButton:link{
+    color: white;
+    border-color: purple;
+    background-color: purple;
+}
+
+.coms1 {
+    display: inline;
+    max-width: 20%;
+    margin-right: 2%;
+}
+
+.coms2 {
+    max-width: 78%;
+}
+
+.coms3 , .coms3:hover , .coms3:visited{
+    text-decoration: none;
+    color: black;
+    display: inline;
+}
+
+.small {
+    width: 50px;
+    height: 50px;
+}
+
+.checked {
+    color: orange;
+}
+
+.stars {
+    display: inline;
+    margin-top: -1rem;
+>>>>>>> joca
 }
