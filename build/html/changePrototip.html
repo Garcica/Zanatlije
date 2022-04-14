@@ -10,15 +10,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="stylePrototip.css" rel="stylesheet">
+    <script src="skriptaPrototip.js"></script>
 
 </head>
 
-<body>
+<body onload="zanatlijaReg()">
 
     <!--NAVIGACIJA-->
     <div class="container-fluid py-1 navImg"></div>
     <nav class="navbar navbar-expand-sm bg-black p-0">
-        <a class="navbar-brand ms-1 me-0" href="index.html">
+        <a class="navbar-brand ms-1 me-0" href="searchLoggedPrototip.html">
             <img src="slike/Logo.png" alt="Logo.png" style="width:80px" title="Zanatlije"> 
         </a>
         <ul class="navbar-nav">
@@ -44,5 +45,143 @@
         </ul>     
     </nav>
     <div class="container-fluid py-1 navImg"></div>
+
+     <!---FORMA ZA IZMENU-->
+     <form action="myPrototip.html" class="container mt-5 py-3" style="border-radius: 15px; background-color:rgb(254, 206, 0); border: 5px solid black"> 
+        <table class="table mx-auto table-borderless text-center" style="width: 350px; background-color:black;border-radius: 15px;">
+            <tr>
+                <td>
+                    <input type="text" name="username" id="username" value="Mister Proper" >
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="password" name="password" id="password" value="Coa123">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="password" name="passwordrRepeat" id="passwordRepeat" value="Coa123">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="name" id="name" value="Mister">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="lastName" id="lastName" value="Proper">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
+                    <label class="btn btn-outline-success green" for="success-outlined">MUŠKO</label>
+                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+                    <label class="btn btn-outline-danger red" for="danger-outlined">ŽENSKO</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="sel" name="sellist">
+                        <option selected>Beograd</option>
+                        <option>Novi Sad</option>
+                        <option>Niš</option>
+                        <option>Kragujevac</option>
+                        <option>Leskovac</option>
+                        <option>Subotica</option>
+                        <option>Zrenjanin</option>
+                        <option>Pančevo</option>
+                        <option>Čačak</option>
+                        <option>Novi Pazar</option>
+                        <option>Kraljevo</option>
+                        <option>Smederevo</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="email" name="meil" id="meil" value="mister@proper.com">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="tel" name="tel" id="tel" value="+381 123456789">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea name="opis" id="opis" cols="30" rows="5">Vaš omiljeni ćelavi moler.</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="form-control" type="file" id="formFile" style="display: none">
+                    <label class="btn" onclick="document.getElementById('formFile').click();" style="background-color: rgb(254, 206, 0);font-weight: 600;" id="image">
+                         PROMENI SLIKU
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" class="btn-check" id="btn-check-2-outlined" autocomplete="off" onchange="zanatlijaReg()" checked>
+                    <label class="btn btn-outline-secondary gray" for="btn-check-2-outlined" style="font-weight: 600">ZANATLIJA</label><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkMoler" autocomplete="off" style="display: none;" checked>
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkMoler" style="display: none;">MOLER</label>
+                    <input type="checkbox" class="btn-check" name="options-outlined" id="checkStolar" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkStolar" style="display: none;">STOLAR</label>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkBravar" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkBravar" style="display: none;">BRAVAR</label>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkVodoinstalater" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkVodoinstalater" style="display: none;">VODOINSTALATER</label>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkElektricar" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkElektricar" style="display: none;">ELEKTRIČAR</label>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkAutomehanicar" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkAutomehanicar" style="display: none;">AUTOMEHANIČAR</label>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkObucar" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkObucar" style="display: none;">OBUĆAR</label>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkTasner" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkTasner" style="display: none;">TAŠNER</label>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkParketar" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkParketar" style="display: none;">PARKETAR</label>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkGipsar" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkGipsar" style="display: none;">GIPSAR</label>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkManikir" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkManikir" style="display: none;">MANIKIR</label>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkPedikir" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkPedikir" style="display: none;">PEDIKIR</label>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkFrizer" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkFrizer" style="display: none;">FRIZER</label>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkKrojac" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkKrojac" style="display: none;">KROJAČ</label>
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkOstalo" autocomplete="off" style="display: none;">
+                    <label class="btn btn-outline-success green formaZanatlije" for="checkOstalo" style="display: none;">OSTALO</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="imeFirme" id="imeFirme" value="Proper Corporation" class="formaZanatlije" style="display: none;">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="adresaLokala" id="adresaLokala" value="Bogu iza nogu 23" class="formaZanatlije" style="display: none;">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="btn" style="background-color: rgb(254, 206, 0); font-weight: 600;" id="login">
+                        IZMENI
+                    </button>
+                </td>
+            </tr>
+
+        </table>
+    </form>
 </body>
 </html>
