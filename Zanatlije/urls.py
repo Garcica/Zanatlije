@@ -22,8 +22,11 @@ from ZanatlijeApp import views
 
 urlpatterns = [
     path('', views.search, name="search"),
-    path('admin/', admin.site.urls),
     path('odobravanje/', views.admin_odobravanje, name="adminOdobravanje"),
     path('adminPanel/', views.admin, name="adminPanel"),
-    path('registracija/', views.registration, name="registracija")
+    path('admin/', admin.site.urls),
+    path('login/', views.login_req, name='login'),
+    path('register/', views.reister_req, name='register'),
+    path('profile/', views.profile, name='myprofile'),
+    path('edit/', views.edit, name='edit')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

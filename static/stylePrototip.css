@@ -266,3 +266,12 @@ label.gray:hover {
     display: inline;
     margin-top: -1rem;
 }
+#formaZanatlije
+{
+    display: none; !important;
+    position: absolute;
+}
+.zanati
+{
+    display: none;
+}

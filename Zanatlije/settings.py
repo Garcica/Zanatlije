@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_phfbz!^hw2o5@=$^tla_om+$x6e%lk2pfcv*v3-d%yoi_z6km'
+SECRET_KEY = 'django-insecure-)7=6q_83cp8%7q$xgqt9gh2c2l_zfw95w5@f@j)*&67)mqk#65'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -123,8 +123,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Additional locations of static files
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Default primary key field type

@@ -34,17 +34,18 @@
             <li class="nav-item">
                 <a id="active" class="nav-link" href="signupPrototip.html">REGISTRACIJA</a>
             </li>
-            
-        </ul>     
+
+        </ul>
     </nav>
     <div class="container-fluid py-1 navImg"></div>
 
     <!---FORMA ZA REGISTRACIJU-->
-    <form action="loginPrototip.html" class="container mt-5 py-3" style="border-radius: 15px; background-color:rgb(254, 206, 0); border: 5px solid black"> 
+    <form method="POST" class="container mt-5 py-3" style="border-radius: 15px; background-color:rgb(254, 206, 0); border: 5px solid black">
+        {% csrf_token %}
         <table class="table mx-auto table-borderless text-center" style="width: 350px; background-color:black;border-radius: 15px;">
             <tr>
                 <td>
-                    <input type="text" name="username" id="username" placeholder="Korisničko ime" >
+                    <input type="text" name="username" id="username" placeholder="Korisničko ime">
                 </td>
             </tr>
             <tr>
@@ -54,7 +55,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="password" name="passwordrRepeat" id="passwordRepeat" placeholder="Ponovljena lozinka">
+                    <input type="password" name="passwordRepeat" id="passwordRepeat" placeholder="Ponovljena lozinka">
                 </td>
             </tr>
             <tr>
@@ -69,9 +70,9 @@
             </tr>
             <tr>
                 <td>
-                    <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked>
+                    <input type="radio" class="btn-check" name="pol" id="success-outlined" value="M" autocomplete="off" checked>
                     <label class="btn btn-outline-success green" for="success-outlined">MUŠKO</label>
-                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+                    <input type="radio" class="btn-check" name="pol" id="danger-outlined" value="Z" autocomplete="off">
                     <label class="btn btn-outline-danger red" for="danger-outlined">ŽENSKO</label>
                 </td>
             </tr>
@@ -125,35 +126,35 @@
             </tr>
             <tr>
                 <td>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkMoler" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkMoler" autocomplete="off" style="display: none;" value="MOLER">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkMoler" style="display: none;">MOLER</label>
-                    <input type="checkbox" class="btn-check" name="options-outlined" id="checkStolar" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check" name="options-outlined" id="checkStolar" autocomplete="off" style="display: none;" value="STOLAR">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkStolar" style="display: none;">STOLAR</label>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkBravar" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkBravar" autocomplete="off" style="display: none;" value="BRAVAR">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkBravar" style="display: none;">BRAVAR</label>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkVodoinstalater" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkVodoinstalater" autocomplete="off" style="display: none;" value="VODOINSTALATER">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkVodoinstalater" style="display: none;">VODOINSTALATER</label>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkElektricar" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkElektricar" autocomplete="off" style="display: none;" value="ELEKTRIČAR">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkElektricar" style="display: none;">ELEKTRIČAR</label>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkAutomehanicar" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkAutomehanicar" autocomplete="off" style="display: none;" value="AUTOMEHANIČAR">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkAutomehanicar" style="display: none;">AUTOMEHANIČAR</label>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkObucar" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkObucar" autocomplete="off" style="display: none;" value="OBUĆAR">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkObucar" style="display: none;">OBUĆAR</label>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkTasner" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkTasner" autocomplete="off" style="display: none;" value="TAŠNER">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkTasner" style="display: none;">TAŠNER</label>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkParketar" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkParketar" autocomplete="off" style="display: none;" value="PARKETAR">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkParketar" style="display: none;">PARKETAR</label>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkGipsar" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkGipsar" autocomplete="off" style="display: none;" value="GIPSAR">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkGipsar" style="display: none;">GIPSAR</label>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkManikir" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkManikir" autocomplete="off" style="display: none;" value="MANIKIR">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkManikir" style="display: none;">MANIKIR</label>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkPedikir" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkPedikir" autocomplete="off" style="display: none;" value="PEDIKIR">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkPedikir" style="display: none;">PEDIKIR</label>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkFrizer" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkFrizer" autocomplete="off" style="display: none;" value="FRIZER">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkFrizer" style="display: none;">FRIZER</label>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkKrojac" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkKrojac" autocomplete="off" style="display: none;" value="KROJAČ">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkKrojac" style="display: none;">KROJAČ</label>
-                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkOstalo" autocomplete="off" style="display: none;">
+                    <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkOstalo" autocomplete="off" style="display: none;" value="OSTALO">
                     <label class="btn btn-outline-success green formaZanatlije" for="checkOstalo" style="display: none;">OSTALO</label>
                 </td>
             </tr>
@@ -178,4 +179,5 @@
         </table>
     </form>
 </body>
+
 </html>

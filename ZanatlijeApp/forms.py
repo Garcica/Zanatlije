@@ -1,5 +1,5 @@
-from django import forms
+from django.forms import forms, CharField
 
 
-class DateForm(forms.Form):
-    date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'])
+class LoginForm(forms.Form):
+    keyword = CharField(max_length=50)

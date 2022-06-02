@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Zanatlije Admin</title>
 
@@ -62,21 +63,19 @@
                 </tr>
             </thead>
             <tbody>
-            {% if users %}
-                {% for user in  users %}
-                    <tr>
+                {% if users %} {% for user in users %}
+                <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td><a href="#">{{ user.username }}</a></td>
-                        <form method="POST">
-                            {% csrf_token %}
-                            <td><input type="date" class="datepicker" name="Date"><input type="submit" class="btn btn-table" name="Banuj" value="Banuj"></td>
-                            <td><input type="submit" class="btn btn-table" name="Obrisi" value="Obrisi"></td>
-                            <td><input type="submit" class="btn btn-table" name="Dodaj" value="Dodaj" ><input type="submit" class="btn btn-table" name="Ukloni" value="Ukloni"></td>
-                            <input type="hidden" name="username" value="{{ user.username }}">
-                        </form>
-                    </tr>
-                {% endfor %}
-            {% endif %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <td><input type="date" class="datepicker" name="Date"><input type="submit" class="btn btn-table" name="Banuj" value="Banuj"></td>
+                        <td><input type="submit" class="btn btn-table" name="Obrisi" value="Obrisi"></td>
+                        <td><input type="submit" class="btn btn-table" name="Dodaj" value="Dodaj"><input type="submit" class="btn btn-table" name="Ukloni" value="Ukloni"></td>
+                        <input type="hidden" name="username" value="{{ user.username }}">
+                    </form>
+                </tr>
+                {% endfor %} {% endif %}
             </tbody>
         </table>
     </div>

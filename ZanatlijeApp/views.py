@@ -1,15 +1,18 @@
-import os.path
+import os
 from itertools import chain
 import datetime
 from django.core.files.base import ContentFile, File
 from django.db.models import Q
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.hashers import check_password
+from django.contrib.messages.storage import session
+from django.http import HttpResponse, HttpRequest, request
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.utils.dateparse import parse_date
-
-from ZanatlijeApp.forms import DateForm
 from ZanatlijeApp.models import Korisnik, Zanatlija
 
 
@@ -171,10 +174,201 @@ def admin(request):
 
     return render(request, 'adminPrototip.html', context)
 
+class UserBackend:
 
-def search(request):
-    return render(request, 'searchPrototip.html')
+    # Create an authentication method
+    # This is called by the standard Django login procedure
+    def authenticateZanatlija(self, username=None, password=None):
+        #print(username)
+        try:
+            # Try to find a user matching your username
+            user = Zanatlija.objects.get(username=username)
+
+            print(user.username)
+            #  Check the password is the reverse of the username
+            if password == user.sifra:
+                # Yes? return the Django user object
+                return user
+            else:
+                # No? return None - triggers default login failed
+                return None
+        except Zanatlija.DoesNotExist:
+            # No user was found, return None - triggers default login failed
+            return None
+
+    def authenticateKorisnik(self, username=None, password=None):
+        #print(username)
+        try:
+            # Try to find a user matching your username
+            user = Korisnik.objects.get(username=username)
+
+            print(user.username)
+            #  Check the password is the reverse of the username
+            if password == user.sifra:
+                # Yes? return the Django user object
+                return user
+            else:
+                # No? return None - triggers default login failed
+                return None
+        except Korisnik.DoesNotExist:
+            # No user was found, return None - triggers default login failed
+            return None
+
+    # Required for your backend to work properly - unchanged in most scenarios
+
+    def get_user(self, user_id):
+        try:
+            return Korisnik.objects.get(pk=user_id)
+        except Korisnik.DoesNotExist:
+            return None
 
 
-def registration(request):
-    return render(request, 'signupPrototip.html')
+def login_req(request: HttpRequest):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    #user = Zanatlija.objects.get(username=username)
+    #print(user.sifra)
+    user = UserBackend.authenticateZanatlija(self=UserBackend(), username=username, password=password)
+    if user is None:
+        user = UserBackend.authenticateKorisnik(self=UserBackend(), username=username, password=password)
+    #print(user)
+    if user is None:
+        return render(request, 'loginPrototip.html')
+
+    request.session.create()
+    request.session['username'] = user.username
+    #login(request, user)
+    context = {
+        'username': user.username,
+        'ime': user.ime,
+        'prezime': user.prezime,
+        'mail': user.email,
+        'tel': user.telefon,
+        'opis': user.opis,
+    }
+    return render(request, 'myPrototip.html', context)
+
+def reister_req(request: HttpRequest):
+    str = ''
+    username = request.POST.get('username')
+    if username == '':
+        str = 'Nesiravno korisnicko ime'
+    password = request.POST.get('password')
+    passwordRepeat = request.POST.get('passwordRepeat')
+    if password != passwordRepeat:
+        str = 'Ne poklapaju se sifre'
+    name = request.POST.get('name')
+    lastname = request.POST.get('lastName')
+    pol = request.POST.get('pol')
+    #print(lastname)
+    grad = request.POST.get('sellist')
+    mail = request.POST.get('meil')
+    phone = request.POST.get('tel')
+    desc = request.POST.get('opis')
+    slika = request.POST.get('formFile')
+    zanati = request.POST.getlist('options-outlined')
+    zanat = ''
+    for z in zanati:
+        zanat += z+'-'
+    zanat = zanat[:-1]
+    firma = request.POST.get('imeFirme')
+    adresa = request.POST.get('adresaLokala')
+
+    if username is None or password is None or passwordRepeat is None or name is None or lastname is None or pol is None or grad is None or mail is None or phone is None or desc is None:
+        print('DA')
+        return render(request, 'signupPrototip.html')
+
+    if zanat == '':
+        #print('DA')
+        user = Korisnik.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol, grad=grad, email=mail, telefon=phone, opis=desc, slika=slika)
+        user.save()
+    else:
+        user = Zanatlija.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol, grad=grad, email=mail, telefon=phone, opis=desc, slika=slika, zanati=zanat, ime_firme=firma, adresa_lokala=adresa)
+        user.save()
+
+    context = {
+        'context': str
+    }
+    return render(request, 'signupPrototip.html', context)
+
+def profile(request: HttpRequest):
+    username = request.session['username']
+    user = None
+    if user is None:
+        try:
+            user = Korisnik.objects.get(username=username)
+        except Korisnik.DoesNotExist:
+            user = None
+    if user is None:
+        try:
+            user = Zanatlija.objects.get(username=username)
+        except Zanatlija.DoesNotExist:
+            user = None
+    print(user.username)
+
+
+    context = {
+        'username': user.username,
+        'ime': user.ime,
+        'prezime': user.prezime,
+        'mail': user.email,
+        'tel': user.telefon,
+        'opis': user.opis,
+    }
+    return render(request, 'myPrototip.html', context)
+
+
+def edit(request: HttpRequest):
+    username = request.session['username']
+    user = None
+    if user is None:
+        try:
+            user = Korisnik.objects.get(username=username)
+            imeprezime = request.POST.get('imeprezime')
+            if imeprezime is not None:
+                ime = str(imeprezime).split(' ')[0]
+                prezime = str(imeprezime).split(' ')[1]
+                Korisnik.objects.filter(username__exact=username).update(ime=ime, prezime=prezime)
+            mail = request.POST.get('mail')
+            if mail is not None:
+                Korisnik.objects.filter(username__exact=username).update(email=mail)
+            tel = request.POST.get('tel')
+            if tel is not None:
+                Korisnik.objects.filter(username__exact=username).update(telefon=tel)
+            opis = request.POST.get('opis')
+            if opis is not None:
+                Korisnik.objects.filter(username__exact=username).update(opis=opis)
+        except Korisnik.DoesNotExist:
+            user = None
+    if user is None:
+        try:
+            user = Zanatlija.objects.get(username=username)
+            imeprezime = request.POST.get('imeprezime')
+            if imeprezime is not None:
+                ime = str(imeprezime).split(' ')[0]
+                prezime = str(imeprezime).split(' ')[1]
+                Zanatlija.objects.filter(username__exact=username).update(ime=ime, prezime=prezime)
+            mail = request.POST.get('mail')
+            if mail is not None:
+                Zanatlija.objects.filter(username__exact=username).update(email=mail)
+            tel = request.POST.get('tel')
+            if tel is not None:
+                Zanatlija.objects.filter(username__exact=username).update(telefon=tel)
+            opis = request.POST.get('opis')
+            if opis is not None:
+                Zanatlija.objects.filter(username__exact=username).update(opis=opis)
+        except Zanatlija.DoesNotExist:
+            user = None
+    print(request.user.username)
+    print(request)
+
+    print(request.POST.get('imeprezime'))
+    context = {
+        'username': user.username,
+        'ime': user.ime,
+        'prezime': user.prezime,
+        'mail': user.email,
+        'tel': user.telefon,
+        'opis': user.opis,
+    }
+    return render(request, 'editProfile.html', context)

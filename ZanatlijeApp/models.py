@@ -169,8 +169,7 @@ class Korisnik(models.Model):
 class Saradnja(models.Model):
     idsaradnja = models.AutoField(db_column='idSaradnja', primary_key=True)  # Field name made lowercase.
     idkorisnik = models.ForeignKey(Korisnik, models.DO_NOTHING, db_column='idKorisnik')  # Field name made lowercase.
-    idzanatlija = models.ForeignKey('Zanatlija', models.DO_NOTHING,
-                                    db_column='idZanatlija')  # Field name made lowercase.
+    idzanatlija = models.ForeignKey('Zanatlija', models.DO_NOTHING, db_column='idZanatlija')  # Field name made lowercase.
     datum = models.DateField()
     status = models.CharField(max_length=1)
 

@@ -19,7 +19,6 @@
     <!--NAVIGACIJA-->
     <div class="container-fluid py-1 navImg"></div>
     <nav class="navbar navbar-expand-sm bg-black p-0">
-        <a class="navbar-brand ms-1 me-0" href="index.html">
         <a class="navbar-brand ms-1 me-0" href="searchPrototip.html">
             {% load static %}
             <img src="{% static 'slike/Logo.png' %}" alt="Logo.png" style="width:80px" title="Zanatlije">
@@ -41,9 +40,6 @@
                 <a class="nav-link" href="adminPrototip.html">ADMIN</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="adminOdobravanjePrototip.html">REGISTRACIJE</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="loginPrototip.html">ODJAVA</a>
             </li>
 
@@ -62,10 +58,6 @@
                             <p class="mb-3">Beograd, Srbija</p>
                             <br>
                             <div class="d-flex ">
-                                <a href="{% url 'edit' %} ">
-                                    <button class="btn btn-outline-primary message fw-bold profilButton">Izmeni profil
-                                    </button>
-                                </a> &nbsp;
                                 <div class="btn btn-outline-primary message fw-bold profilButton" data-bs-toggle="modal"
                                     data-bs-target="#obrisiAlert">Obrisi nalog</div>
                             </div>
@@ -101,30 +93,58 @@
             </div>
             <div class="col-md-7 ps-md-4">
                 <div class="row">
+
+
                     <div class="col-12 px-3 mb-3 pb-3 round">
+                        <form method="POST">
+                            {% csrf_token %}
                         <div class="d-flex align-items-center justify-content-between border-bottom">
                             <p class="py-2 fw-bold">Ime</p>
-                            <p class="py-2">{{ ime }} {{ prezime }}</p>
+                            <input type="text" name="imeprezime" value="{{ ime }} {{ prezime }}">
                         </div>
                         <div class="d-flex align-items-center justify-content-between border-bottom">
                             <p class="py-2 fw-bold">Email</p>
-                            <p class="py-2">{{ mail }}</p>
+                            <input type="text" name="mail" value="{{ mail }}">
                         </div>
                         <div class="d-flex align-items-center justify-content-between border-bottom">
                             <p class="py-2 fw-bold">Broj telefona</p>
-                            <p class="py-2"> {{ tel }}</p>
+                            <input type="text" name="tel" value="{{ tel }}">
                         </div>
-                        <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center justify-content-between border-bottom">
                             <p class="py-2 fw-bold">Opis</p>
-                            <p class="py-2">{{ opis }}</p>
+                            <input type="text" name="opis" value="{{ opis }}">
                         </div>
-                        <!--
+
+                            <div class="d-flex align-items-right justify-content-between">
+                                <a href="{% url 'myprofile' %}">
+
+                                 <button type="submit" class="btn btn-outline-primary message fw-bold profilButton">Sacuvaj</button>
+
+                                </a>
+                                </div>
+                            </form>
+                        <div class="d-flex align-items-center justify-content-between">
+                                <a href="{% url 'myprofile' %}">
+
+                                 <div type="submit" class="btn btn-outline-primary message fw-bold profilButton">Nazad</div>
+
+                                </a>
+                        </div>
+                        </div>
+
+
+
+
+
+
+                    <!--
                         <div class="d-flex align-items-center justify-content-between">
                             <p class="py-2">Adresa</p>
                             <p class="py-2"> Bulevar kralja Aleksandra 79</p>
                         </div>
                         -->
                     </div>
+
                     <div class="col-12  px-3 pb-2 round">
                         <h6 class="d-flex align-items-center mb-3 fw-bold py-3"><i class="me-2">Osobine</i></h6>
                         <small>Strpljenje</small>
