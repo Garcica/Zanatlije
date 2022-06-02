@@ -2,33 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0cad5737-1250-41cc-bf74-58e78881523e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/build/html/adminOdobravanjePrototip.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/adminPrototip.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/changePrototip.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/chatsPrototip.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/jobsPrototip.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/loginPrototip.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/myPrototip.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/profilePrototip.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/searchLoggedPrototip.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/searchPrototip.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/signupPrototip.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/singleChatPrototip.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/skriptaPrototip.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/slike/BgImg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/slike/Logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/slike/NavImg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika7.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/slike/slika1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/slike/slika2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/html/stylePrototip.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zanatlije/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zanatlije/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZanatlijeApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZanatlijeApp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signupPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signupPrototip.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,6 +78,7 @@
       <workItem from="1654100635171" duration="4134000" />
       <workItem from="1654106268751" duration="21353000" />
       <workItem from="1654175643645" duration="3757000" />
+      <workItem from="1654186864597" duration="1012000" />
     </task>
     <servers />
   </component>

@@ -85,7 +85,6 @@ def admin(request):
     if (banuj_button or obrisi_button or dodaj_button or ukloni_button) and request.method == 'POST':
         username = request.POST.get("username", "")
 
-
         if request.POST.get('Obrisi'):
             user = None
             if user is None:
@@ -132,7 +131,7 @@ def admin(request):
             dateStr = request.POST.get("Date", "")
             dateStrArr = dateStr.split("-")
             date = datetime.date(int(dateStrArr[0]), int(dateStrArr[1]), int(dateStrArr[2]))
-            #return HttpResponse(date)
+            # return HttpResponse(date)
             if user is None:
                 try:
                     Korisnik.objects.filter(username=username).update(datum_ban=date)
@@ -175,3 +174,7 @@ def admin(request):
 
 def search(request):
     return render(request, 'searchPrototip.html')
+
+
+def registration(request):
+    return render(request, 'signupPrototip.html')

@@ -24,5 +24,6 @@ urlpatterns = [
     path('', views.search, name="search"),
     path('admin/', admin.site.urls),
     path('odobravanje/', views.admin_odobravanje, name="adminOdobravanje"),
-    path('adminPanel/', views.admin, name="adminPanel")
+    path('adminPanel/', views.admin, name="adminPanel"),
+    path('registracija/', views.registration, name="registracija")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
