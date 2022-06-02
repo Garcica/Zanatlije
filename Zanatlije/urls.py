@@ -21,7 +21,6 @@ from django.urls import path
 from ZanatlijeApp import views
 
 urlpatterns = [
-    path('', views.search, name="search"),
     path('odobravanje/', views.admin_odobravanje, name="adminOdobravanje"),
     path('adminPanel/', views.admin, name="adminPanel"),
     path('admin/', admin.site.urls),

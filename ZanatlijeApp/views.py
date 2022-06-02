@@ -40,12 +40,12 @@ def admin_odobravanje(request):
             user = None
             if user is None:
                 try:
-                    Korisnik.objects.get(username=username)
+                    user = Korisnik.objects.get(username=username)
                 except Korisnik.DoesNotExist:
                     user = None
             if user is None:
                 try:
-                    Zanatlija.objects.get(username=username)
+                    user = Zanatlija.objects.get(username=username)
                 except Zanatlija.DoesNotExist:
                     user = None
             if user is not None:
@@ -174,12 +174,13 @@ def admin(request):
 
     return render(request, 'adminPrototip.html', context)
 
+
 class UserBackend:
 
     # Create an authentication method
     # This is called by the standard Django login procedure
     def authenticateZanatlija(self, username=None, password=None):
-        #print(username)
+        # print(username)
         try:
             # Try to find a user matching your username
             user = Zanatlija.objects.get(username=username)
@@ -197,7 +198,7 @@ class UserBackend:
             return None
 
     def authenticateKorisnik(self, username=None, password=None):
-        #print(username)
+        # print(username)
         try:
             # Try to find a user matching your username
             user = Korisnik.objects.get(username=username)
@@ -226,18 +227,18 @@ class UserBackend:
 def login_req(request: HttpRequest):
     username = request.POST.get('username')
     password = request.POST.get('password')
-    #user = Zanatlija.objects.get(username=username)
-    #print(user.sifra)
+    # user = Zanatlija.objects.get(username=username)
+    # print(user.sifra)
     user = UserBackend.authenticateZanatlija(self=UserBackend(), username=username, password=password)
     if user is None:
         user = UserBackend.authenticateKorisnik(self=UserBackend(), username=username, password=password)
-    #print(user)
+    # print(user)
     if user is None:
         return render(request, 'loginPrototip.html')
 
     request.session.create()
     request.session['username'] = user.username
-    #login(request, user)
+    # login(request, user)
     context = {
         'username': user.username,
         'ime': user.ime,
@@ -247,6 +248,7 @@ def login_req(request: HttpRequest):
         'opis': user.opis,
     }
     return render(request, 'myPrototip.html', context)
+
 
 def reister_req(request: HttpRequest):
     str = ''
@@ -260,7 +262,7 @@ def reister_req(request: HttpRequest):
     name = request.POST.get('name')
     lastname = request.POST.get('lastName')
     pol = request.POST.get('pol')
-    #print(lastname)
+    # print(lastname)
     grad = request.POST.get('sellist')
     mail = request.POST.get('meil')
     phone = request.POST.get('tel')
@@ -269,7 +271,7 @@ def reister_req(request: HttpRequest):
     zanati = request.POST.getlist('options-outlined')
     zanat = ''
     for z in zanati:
-        zanat += z+'-'
+        zanat += z + '-'
     zanat = zanat[:-1]
     firma = request.POST.get('imeFirme')
     adresa = request.POST.get('adresaLokala')
@@ -279,17 +281,21 @@ def reister_req(request: HttpRequest):
         return render(request, 'signupPrototip.html')
 
     if zanat == '':
-        #print('DA')
-        user = Korisnik.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol, grad=grad, email=mail, telefon=phone, opis=desc, slika=slika)
+        # print('DA')
+        user = Korisnik.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol,
+                                       grad=grad, email=mail, telefon=phone, opis=desc, slika=slika, status="N")
         user.save()
     else:
-        user = Zanatlija.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol, grad=grad, email=mail, telefon=phone, opis=desc, slika=slika, zanati=zanat, ime_firme=firma, adresa_lokala=adresa)
+        user = Zanatlija.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol,
+                                        grad=grad, email=mail, telefon=phone, opis=desc, slika=slika, zanati=zanat,
+                                        ime_firme=firma, adresa_lokala=adresa, status="N")
         user.save()
 
     context = {
         'context': str
     }
     return render(request, 'signupPrototip.html', context)
+
 
 def profile(request: HttpRequest):
     username = request.session['username']
@@ -305,7 +311,6 @@ def profile(request: HttpRequest):
         except Zanatlija.DoesNotExist:
             user = None
     print(user.username)
-
 
     context = {
         'username': user.username,
