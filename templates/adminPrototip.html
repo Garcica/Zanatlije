@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zanatlije Admin</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    {% load static %}
+    <link href="{% static 'stylePrototip.css' %}" rel="stylesheet">
+    <script type="text/javascript" src="{% static 'skriptaPrototip.js' %}"></script>
+</head>
+
+<body>
+
+    <!--NAVIGACIJA-->
+    <div class="container-fluid py-1 navImg"></div>
+    <nav class="navbar navbar-expand-sm bg-black p-0">
+        <a class="navbar-brand ms-1 me-0" href="index.html">
+            {% load static %}
+            <img src="{% static 'slike/Logo.png' %}" alt="Logo.png" style="width:80px" title="Zanatlije">
+        </a>
+        <ul class="navbar-nav">
+            <li class="nav-right">
+                <a class="nav-link" href="searchLoggedPrototip.html">PRETRAGA</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="jobsPrototip.html">SARADNJE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="chatsPrototip.html">ĆASKANJA</a>
+            </li>
+            <li class="nav-right">
+                <a class="nav-link" href="myPrototip.html">MOJ PROFIL</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'adminPanel' %}">ADMIN</a>
+            </li>
+            <li class="nav-item">
+                <a id="active" class="nav-link" href="{% url 'adminOdobravanje' %}">REGISTRACIJE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="loginPrototip.html">ODJAVA</a>
+            </li>
+
+        </ul>
+    </nav>
+    <div class="container-fluid py-1 navImg"></div>
+
+    <div class="container table-container">
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Korisnicko ime</th>
+                    <th scope="col">Banuj</th>
+                    <th scope="col">Obrisi</th>
+                    <th scope="col">Dodaj/Ukloni moderatorske privilegije</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if users %}
+                {% for user in  users %}
+                    <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td><a href="#">{{ user.username }}</a></td>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <td><input type="date" class="datepicker" name="Date"><input type="submit" class="btn btn-table" name="Banuj" value="Banuj"></td>
+                            <td><input type="submit" class="btn btn-table" name="Obrisi" value="Obrisi"></td>
+                            <td><input type="submit" class="btn btn-table" name="Dodaj" value="Dodaj" ><input type="submit" class="btn btn-table" name="Ukloni" value="Ukloni"></td>
+                            <input type="hidden" name="username" value="{{ user.username }}">
+                        </form>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
