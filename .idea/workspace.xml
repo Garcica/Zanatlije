@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0cad5737-1250-41cc-bf74-58e78881523e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/build/html/adminOdobravanjePrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/adminPrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/changePrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/chatsPrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/jobsPrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/loginPrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/myPrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/profilePrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/searchLoggedPrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/searchPrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/signupPrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/singleChatPrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/skriptaPrototip.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/slike/BgImg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/slike/Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/slike/NavImg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/slike/Slika9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/slike/slika1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/slike/slika2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/html/stylePrototip.css" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="29z0Rv7ms2bRROnAAzPcvBkbvKS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="Zanatlije" type="Python.DjangoServer" factoryName="Django server">
+      <module name="Zanatlije" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="Zanatlije.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0cad5737-1250-41cc-bf74-58e78881523e" name="Changes" comment="" />
+      <created>1654100601719</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1654100601719</updated>
+      <workItem from="1654100635171" duration="4134000" />
+      <workItem from="1654106268751" duration="21353000" />
+      <workItem from="1654175643645" duration="3757000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
