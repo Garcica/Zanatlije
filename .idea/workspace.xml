@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0cad5737-1250-41cc-bf74-58e78881523e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zanatlije/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zanatlije/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZanatlijeApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZanatlijeApp/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/adminOdobravanjePrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/adminOdobravanjePrototip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/adminPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/adminPrototip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/loginPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/loginPrototip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/myPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/myPrototip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/signupPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signupPrototip.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +77,7 @@
       <workItem from="1654175643645" duration="3757000" />
       <workItem from="1654186864597" duration="1012000" />
       <workItem from="1654196172212" duration="1578000" />
+      <workItem from="1654274190471" duration="739000" />
     </task>
     <servers />
   </component>
