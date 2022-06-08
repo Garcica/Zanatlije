@@ -1,4 +1,5 @@
 import os
+import re
 from itertools import chain
 import datetime
 from django.core.files.base import ContentFile, File
@@ -287,68 +288,113 @@ def login_req(request: HttpRequest):
 
 
 def reister_req(request: HttpRequest):
-    str = ''
-    username = request.POST.get('username')
-    if username == '':
-        str = 'Molimo vas unesite sva polja!'
-    password = request.POST.get('password')
-    if password == '':
-        str = 'Molimo vas unesite sva polja!'
-    passwordRepeat = request.POST.get('passwordRepeat')
-    if passwordRepeat == '':
-        str = 'Molimo vas unesite sva polja!'
-    if password != '' and passwordRepeat != '':
-        if password != passwordRepeat:
-            str = 'Ne poklapaju se sifre'
-    name = request.POST.get('name')
-    if name == '':
-        str = 'Molimo vas unesite sva polja!'
-    lastname = request.POST.get('lastName')
-    if lastname == '':
-        str = 'Molimo vas unesite sva polja!'
-    pol = request.POST.get('pol')
-    # print(lastname)
-    grad = request.POST.get('sellist')
-    if grad == '':
-        str = 'Molimo vas unesite sva polja!'
-    mail = request.POST.get('meil')
-    if mail == '':
-        str = 'Molimo vas unesite sva polja!'
-    phone = request.POST.get('tel')
-    if phone == '':
-        str = 'Molimo vas unesite sva polja!'
-    desc = request.POST.get('opis')
-    if desc == '':
-        str = 'Molimo vas unesite sva polja!'
-    slika = request.POST.get('formFile')
-    if slika == '':
-        str = 'Molimo vas unesite sva polja!'
-    zanati = request.POST.getlist('options-outlined')
-    zanat = ''
-    for z in zanati:
-        zanat += z + '-'
-    zanat = zanat[:-1]
-    firma = request.POST.get('imeFirme')
-    adresa = request.POST.get('adresaLokala')
+    error = ''
+    user = None
 
-    context = {
-        'context': str
-    }
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        if username == '':
+            error = 'Molimo vas unesite sva polja!'
+        if len(username) > 20:
+            error = 'Predugacak username (<21)!'
+        if user is None:
+            try:
+                user = Korisnik.objects.get(username=username)
+            except Korisnik.DoesNotExist:
+                user = None
+        if user is None:
+            try:
+                user = Zanatlija.objects.get(username=username)
+            except Zanatlija.DoesNotExist:
+                user = None
+        if user is not None:
+            error = 'Korisnik sa unetim korisnickim imenom vec postoji u bazi!'
+        user = None
+        password = request.POST.get('password')
+        if password == '':
+            error = 'Molimo vas unesite sva polja!'
+        if len(password) > 20:
+            error = 'Predugacka lozinka (<21)!'
+        passwordRepeat = request.POST.get('passwordRepeat')
+        if passwordRepeat == '':
+            error = 'Molimo vas unesite sva polja!'
+        if password != '' and passwordRepeat != '':
+            if password != passwordRepeat:
+                error = 'Ne poklapaju se sifre'
+        name = request.POST.get('name')
+        if name == '':
+            error = 'Molimo vas unesite sva polja!'
+        if name != '' and not re.match(r"^[a-zA-Z]+$", name):
+            error = 'Molimo vas unesite ispravno ime!'
+        lastname = request.POST.get('lastName')
+        if lastname == '':
+            error = 'Molimo vas unesite sva polja!'
+        if lastname != '' and not re.match(r"^[a-zA-Z]+$", lastname):
+            error = 'Molimo vas unesite ispravno prezime!'
+        pol = request.POST.get('pol')
+        grad = request.POST.get('sellist')
+        if grad == '':
+            error = 'Molimo vas unesite sva polja!'
+        mail = request.POST.get('meil')
+        if mail == '':
+            error = 'Molimo vas unesite sva polja!'
+        if mail != '' and re.match(r"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$", mail) is None:
+            error = 'Molimo unesite ispravnu mail adresu!'
+        if user is None:
+            try:
+                user = Korisnik.objects.get(email=mail)
+            except Korisnik.DoesNotExist:
+                user = None
+        if user is None:
+            try:
+                user = Zanatlija.objects.get(email=mail)
+            except Zanatlija.DoesNotExist:
+                user = None
+        if user is not None:
+            error = 'Korisnik sa unetim mejlom vec postoji u bazi!'
+        user = None
+        phone = request.POST.get('tel')
+        if phone == '':
+            error = 'Molimo vas unesite sva polja!'
+        if phone != '' and re.match(r"^(\+\d{3}[\s\-\/]?\d{2}[\s\-\/]?\d{3}[\s\-\/]?\d{3,4})$|^((?:(?!\+))\d{3}[\s\-\/]?\d{3}[\s\-\/]?\d{3,4})$", phone) is None:
+            error = 'Molimo vas unesite ispravan broj telefona!'
+        desc = request.POST.get('opis')
+        if desc == '':
+            error = 'Molimo vas unesite sva polja!'
+        slika = request.POST.get('formFile')
+        #if slika == '' or slika is None:
+        #    str = 'Molimo vas unesite sva polja!'
+        zanati = request.POST.getlist('options-outlined')
+        zanat = ''
+        for z in zanati:
+            zanat += z + '-'
+        zanat = zanat[:-1]
+        firma = request.POST.get('imeFirme')
+        adresa = request.POST.get('adresaLokala')
 
-    if username is None or password is None or passwordRepeat is None or name is None or lastname is None or pol is None or grad is None or mail is None or phone is None or desc is None:
-        print('DA')
-        return render(request, 'signupPrototip.html', context)
+        context = {
+            'context': error
+        }
 
-    if zanat == '':
+        if error != '':
+            return render(request, 'signupPrototip.html', context)
+
+        if zanat == '':
         # print('DA')
-        user = Korisnik.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol,
+            user = Korisnik.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol,
                                        grad=grad, email=mail, telefon=phone, opis=desc, slika=slika, status="N")
-        user.save()
-    else:
-        user = Zanatlija.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol,
+            user.save()
+        else:
+            user = Zanatlija.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol,
                                         grad=grad, email=mail, telefon=phone, opis=desc, slika=slika, zanati=zanat,
                                         ime_firme=firma, adresa_lokala=adresa, status="N")
-        user.save()
+            user.save()
+
+        return render(request, 'signupPrototip.html', context)
+
+    context = {
+        'context': error
+    }
 
     return render(request, 'signupPrototip.html', context)
 
@@ -438,8 +484,10 @@ def edit(request: HttpRequest):
     begin = '../../media/'
     slika_path = begin + str(user.slika).strip('b').strip('\'')
 
+    checkUser = None
+    dobar = True
+
     if request.method == 'POST':
-        print("STIGAO POST REQUEST")
         if not type:
                 imeprezime = request.POST.get('imeprezime')
                 if imeprezime != '':
@@ -449,15 +497,53 @@ def edit(request: HttpRequest):
                 else:
                     error = 'Molimo vas unesite sva polja!'
                 mail = request.POST.get('mail')
-                if mail != '':
+                if mail == '':
+                    #Korisnik.objects.filter(username__exact=username).update(email=mail)
+                #else:
+                    error = 'Molimo vas unesite sva polja!'
+                    dobar = False
+
+                if mail != '' and re.match(r"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$", mail) is None:
+                    error = 'Molimo unesite ispravnu mail adresu!'
+                    dobar = False
+                if checkUser is None:
+                    try:
+                        checkUser = Korisnik.objects.get(email=mail)
+                    except Korisnik.DoesNotExist:
+                        checkUser = None
+                if checkUser is None:
+                    try:
+                        checkUser = Zanatlija.objects.get(email=mail)
+                    except Zanatlija.DoesNotExist:
+                        checkUser = None
+                if checkUser is not None:
+                    error = 'Korisnik sa unetim mejlom vec postoji u bazi!'
+                    dobar = False
+
+                checkUser = None
+
+                if dobar:
                     Korisnik.objects.filter(username__exact=username).update(email=mail)
-                else:
-                    error = 'Molimo vas unesite sva polja!'
+
+                dobar = True
+
                 tel = request.POST.get('tel')
-                if tel != '':
-                    Korisnik.objects.filter(username__exact=username).update(telefon=tel)
-                else:
+                if tel == '':
+                    #Korisnik.objects.filter(username__exact=username).update(telefon=tel)
+                #else:
                     error = 'Molimo vas unesite sva polja!'
+                    dobar = False
+                if tel != '' and re.match(
+                        r"^(\+\d{3}[\s\-\/]?\d{2}[\s\-\/]?\d{3}[\s\-\/]?\d{3,4})$|^((?:(?!\+))\d{3}[\s\-\/]?\d{3}[\s\-\/]?\d{3,4})$",
+                        tel) is None:
+                    error = 'Molimo vas unesite ispravan broj telefona!'
+                    dobar = False
+
+                if dobar:
+                    Korisnik.objects.filter(username__exact=username).update(telefon=tel)
+
+                dobar = True
+
                 opis = request.POST.get('opis')
                 if opis != '':
                     Korisnik.objects.filter(username__exact=username).update(opis=opis)
@@ -488,15 +574,52 @@ def edit(request: HttpRequest):
                 else:
                     error = 'Molimo vas unesite sva polja!'
                 mail = request.POST.get('mail')
-                if mail != '':
+                if mail == '':
+                    # Korisnik.objects.filter(username__exact=username).update(email=mail)
+                    # else:
+                    error = 'Molimo vas unesite sva polja!'
+                    dobar = False
+
+                if mail != '' and re.match(r"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$", mail) is None:
+                    error = 'Molimo unesite ispravnu mail adresu!'
+                    dobar = False
+                if checkUser is None:
+                    try:
+                        checkUser = Korisnik.objects.get(email=mail)
+                    except Korisnik.DoesNotExist:
+                        checkUser = None
+                if checkUser is None:
+                    try:
+                        checkUser = Zanatlija.objects.get(email=mail)
+                    except Zanatlija.DoesNotExist:
+                        checkUser = None
+                if checkUser is not None:
+                    error = 'Korisnik sa unetim mejlom vec postoji u bazi!'
+                    dobar = False
+
+                checkUser = None
+
+                if dobar:
                     Zanatlija.objects.filter(username__exact=username).update(email=mail)
-                else:
-                    error = 'Molimo vas unesite sva polja!'
+
+                dobar = True
+
                 tel = request.POST.get('tel')
-                if tel != '':
-                    Zanatlija.objects.filter(username__exact=username).update(telefon=tel)
-                else:
+                if tel == '':
+                    # Korisnik.objects.filter(username__exact=username).update(telefon=tel)
+                    # else:
                     error = 'Molimo vas unesite sva polja!'
+                    dobar = False
+                if tel != '' and re.match(
+                        r"^(\+\d{3}[\s\-\/]?\d{2}[\s\-\/]?\d{3}[\s\-\/]?\d{3,4})$|^((?:(?!\+))\d{3}[\s\-\/]?\d{3}[\s\-\/]?\d{3,4})$",
+                        tel) is None:
+                    error = 'Molimo vas unesite ispravan broj telefona!'
+                    dobar = False
+
+                if dobar:
+                    Zanatlija.objects.filter(username__exact=username).update(telefon=tel)
+
+                dobar = True
                 opis = request.POST.get('opis')
                 if opis != '':
                     Zanatlija.objects.filter(username__exact=username).update(opis=opis)
