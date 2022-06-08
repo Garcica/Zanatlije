@@ -35,7 +35,7 @@
                 <a class="nav-link" href="chatsPrototip.html">ĆASKANJA</a>
             </li>
             <li class="nav-right">
-                <a id="active" class="nav-link" href="{% url 'myprofile' korisnik %}">MOJ PROFIL</a>
+                <a class="nav-link" href="{% url 'myprofile' korisnik %}">MOJ PROFIL</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'adminPanel' %}">ADMIN</a>
@@ -65,7 +65,7 @@
                                 <a href="{% url 'edit' %} ">
                                     <button class="btn btn-outline-primary message fw-bold profilButton">Izmeni profil
                                     </button>
-                                </a>
+                                </a> &nbsp;
                                 <div class="btn btn-outline-primary message fw-bold profilButton" data-bs-toggle="modal"
                                     data-bs-target="#obrisiAlert">Obrisi nalog</div>
                             </div>

@@ -23,3 +23,7 @@ function onChange(id) {
     }
     return false;
 }
+
+function regCheck() {
+
+}

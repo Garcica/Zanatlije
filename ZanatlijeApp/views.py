@@ -4,7 +4,7 @@ import datetime
 from django.core.files.base import ContentFile, File
 from django.db.models import Q
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.hashers import check_password
 from django.contrib.messages.storage import session
@@ -69,10 +69,13 @@ def admin_odobravanje(request):
     else:
         total_not_approved = None
 
+    username = request.session['username']
+
     context = {
         'users': total_not_approved,
         'Odobri': odobri_button,
-        'Odbij': odbij_button
+        'Odbij': odbij_button,
+        'korisnik': username
     }
 
     return render(request, 'adminOdobravanjePrototip.html', context)
@@ -84,7 +87,7 @@ def admin(request):
     obrisi_button = request.POST.get("Obrisi")
     dodaj_button = request.POST.get("Dodaj")
     ukloni_button = request.POST.get("Ukloni")
-
+    username = request.session['username']
     if (banuj_button or obrisi_button or dodaj_button or ukloni_button) and request.method == 'POST':
         username = request.POST.get("username", "")
 
@@ -133,8 +136,9 @@ def admin(request):
             user = None
             dateStr = request.POST.get("Date", "")
             dateStrArr = dateStr.split("-")
+
             date = datetime.date(int(dateStrArr[0]), int(dateStrArr[1]), int(dateStrArr[2]))
-            # return HttpResponse(date)
+
             if user is None:
                 try:
                     Korisnik.objects.filter(username=username).update(datum_ban=date)
@@ -169,7 +173,8 @@ def admin(request):
         'Banuj': banuj_button,
         'Obrisi': obrisi_button,
         'Dodaj': dodaj_button,
-        'Ukloni': ukloni_button
+        'Ukloni': ukloni_button,
+        'korisnik': username,
     }
 
     return render(request, 'adminPrototip.html', context)
@@ -185,7 +190,7 @@ class UserBackend:
             # Try to find a user matching your username
             user = Zanatlija.objects.get(username=username)
 
-            print(user.username)
+            # print(user.username)
             #  Check the password is the reverse of the username
             if password == user.sifra:
                 # Yes? return the Django user object
@@ -203,7 +208,7 @@ class UserBackend:
             # Try to find a user matching your username
             user = Korisnik.objects.get(username=username)
 
-            print(user.username)
+            # print(user.username)
             #  Check the password is the reverse of the username
             if password == user.sifra:
                 # Yes? return the Django user object
@@ -225,49 +230,99 @@ class UserBackend:
 
 
 def login_req(request: HttpRequest):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    # user = Zanatlija.objects.get(username=username)
-    # print(user.sifra)
-    user = UserBackend.authenticateZanatlija(self=UserBackend(), username=username, password=password)
-    if user is None:
-        user = UserBackend.authenticateKorisnik(self=UserBackend(), username=username, password=password)
-    # print(user)
-    if user is None:
-        return render(request, 'loginPrototip.html')
+    str = ''
 
-    request.session.create()
-    request.session['username'] = user.username
-    # login(request, user)
-    context = {
-        'username': user.username,
-        'ime': user.ime,
-        'prezime': user.prezime,
-        'mail': user.email,
-        'tel': user.telefon,
-        'opis': user.opis,
-    }
-    return render(request, 'myPrototip.html', context)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if username == '' or password == '':
+            str = 'Molimo vas unesite sva polja!'
+
+        user = None
+        if user is None:
+            try:
+                user = Korisnik.objects.get(username=username)
+            except Korisnik.DoesNotExist:
+                user = None
+        if user is None:
+            try:
+                user = Zanatlija.objects.get(username=username)
+            except Zanatlija.DoesNotExist:
+                user = None
+
+        if user is not None:
+            if user.status == 'N':
+                str = 'Registracija vam jos uvek nije odobrena!'
+
+        if str != '':
+            return render(request, 'loginPrototip.html', context={'str': str})
+        # user = Zanatlija.objects.get(username=username)
+        # print(user.sifra)
+        user = UserBackend.authenticateZanatlija(self=UserBackend(), username=username, password=password)
+        if user is None:
+            user = UserBackend.authenticateKorisnik(self=UserBackend(), username=username, password=password)
+        # print(user)
+
+        if user is None:
+            str = 'Nismo pronasli vas nalog'
+            return render(request, 'loginPrototip.html', context={'str': str})
+
+        context = {
+            'username': user.username,
+            'ime': user.ime,
+            'prezime': user.prezime,
+            'mail': user.email,
+            'tel': user.telefon,
+            'opis': user.opis,
+            'korisnik': user.username,
+            'str': str
+        }
+
+        request.session.create()
+        request.session['username'] = user.username
+        return redirect('myprofile', korisnik=user.username)
+
+    return render(request, 'loginPrototip.html', context={'str': str})
 
 
 def reister_req(request: HttpRequest):
     str = ''
     username = request.POST.get('username')
     if username == '':
-        str = 'Nesiravno korisnicko ime'
+        str = 'Molimo vas unesite sva polja!'
     password = request.POST.get('password')
+    if password == '':
+        str = 'Molimo vas unesite sva polja!'
     passwordRepeat = request.POST.get('passwordRepeat')
-    if password != passwordRepeat:
-        str = 'Ne poklapaju se sifre'
+    if passwordRepeat == '':
+        str = 'Molimo vas unesite sva polja!'
+    if password != '' and passwordRepeat != '':
+        if password != passwordRepeat:
+            str = 'Ne poklapaju se sifre'
     name = request.POST.get('name')
+    if name == '':
+        str = 'Molimo vas unesite sva polja!'
     lastname = request.POST.get('lastName')
+    if lastname == '':
+        str = 'Molimo vas unesite sva polja!'
     pol = request.POST.get('pol')
     # print(lastname)
     grad = request.POST.get('sellist')
+    if grad == '':
+        str = 'Molimo vas unesite sva polja!'
     mail = request.POST.get('meil')
+    if mail == '':
+        str = 'Molimo vas unesite sva polja!'
     phone = request.POST.get('tel')
+    if phone == '':
+        str = 'Molimo vas unesite sva polja!'
     desc = request.POST.get('opis')
+    if desc == '':
+        str = 'Molimo vas unesite sva polja!'
     slika = request.POST.get('formFile')
+    if slika == '':
+        str = 'Molimo vas unesite sva polja!'
     zanati = request.POST.getlist('options-outlined')
     zanat = ''
     for z in zanati:
@@ -276,9 +331,13 @@ def reister_req(request: HttpRequest):
     firma = request.POST.get('imeFirme')
     adresa = request.POST.get('adresaLokala')
 
+    context = {
+        'context': str
+    }
+
     if username is None or password is None or passwordRepeat is None or name is None or lastname is None or pol is None or grad is None or mail is None or phone is None or desc is None:
         print('DA')
-        return render(request, 'signupPrototip.html')
+        return render(request, 'signupPrototip.html', context)
 
     if zanat == '':
         # print('DA')
@@ -291,14 +350,12 @@ def reister_req(request: HttpRequest):
                                         ime_firme=firma, adresa_lokala=adresa, status="N")
         user.save()
 
-    context = {
-        'context': str
-    }
     return render(request, 'signupPrototip.html', context)
 
 
-def profile(request: HttpRequest):
+def profile(request: HttpRequest, korisnik):
     username = request.session['username']
+    # username = korisnik
     user = None
     if user is None:
         try:
@@ -310,8 +367,10 @@ def profile(request: HttpRequest):
             user = Zanatlija.objects.get(username=username)
         except Zanatlija.DoesNotExist:
             user = None
-    print(user.username)
-
+    # print(user.username)
+    # print(user.slika.url)
+    begin = '../../media/'
+    slika_path = begin + str(user.slika).strip('b').strip('\'')
     context = {
         'username': user.username,
         'ime': user.ime,
@@ -319,55 +378,147 @@ def profile(request: HttpRequest):
         'mail': user.email,
         'tel': user.telefon,
         'opis': user.opis,
+        'korisnik': user.username,
+        'slika': slika_path
     }
     return render(request, 'myPrototip.html', context)
+
+
+def someones_profile(request: HttpRequest, neki_profil):
+    korisnik = request.session['username']
+    username = neki_profil
+    user = None
+    if user is None:
+        try:
+            user = Korisnik.objects.get(username=username)
+        except Korisnik.DoesNotExist:
+            user = None
+    if user is None:
+        try:
+            user = Zanatlija.objects.get(username=username)
+        except Zanatlija.DoesNotExist:
+            user = None
+    # print(user.username)
+    # print(user.slika.url)
+    begin = '../../media/'
+    slika_path = begin + str(user.slika).strip('b').strip('\'')
+    # print(slika_path)
+    context = {
+        'username': user.username,
+        'ime': user.ime,
+        'prezime': user.prezime,
+        'mail': user.email,
+        'tel': user.telefon,
+        'opis': user.opis,
+        'neki_profil': user.username,
+        'korisnik': korisnik,
+        'slika': slika_path
+    }
+    return render(request, 'someones_profile.html', context)
 
 
 def edit(request: HttpRequest):
     username = request.session['username']
     user = None
+    error = ''
+    type = False
     if user is None:
         try:
             user = Korisnik.objects.get(username=username)
-            imeprezime = request.POST.get('imeprezime')
-            if imeprezime is not None:
-                ime = str(imeprezime).split(' ')[0]
-                prezime = str(imeprezime).split(' ')[1]
-                Korisnik.objects.filter(username__exact=username).update(ime=ime, prezime=prezime)
-            mail = request.POST.get('mail')
-            if mail is not None:
-                Korisnik.objects.filter(username__exact=username).update(email=mail)
-            tel = request.POST.get('tel')
-            if tel is not None:
-                Korisnik.objects.filter(username__exact=username).update(telefon=tel)
-            opis = request.POST.get('opis')
-            if opis is not None:
-                Korisnik.objects.filter(username__exact=username).update(opis=opis)
+            type = False
         except Korisnik.DoesNotExist:
             user = None
     if user is None:
         try:
             user = Zanatlija.objects.get(username=username)
-            imeprezime = request.POST.get('imeprezime')
-            if imeprezime is not None:
-                ime = str(imeprezime).split(' ')[0]
-                prezime = str(imeprezime).split(' ')[1]
-                Zanatlija.objects.filter(username__exact=username).update(ime=ime, prezime=prezime)
-            mail = request.POST.get('mail')
-            if mail is not None:
-                Zanatlija.objects.filter(username__exact=username).update(email=mail)
-            tel = request.POST.get('tel')
-            if tel is not None:
-                Zanatlija.objects.filter(username__exact=username).update(telefon=tel)
-            opis = request.POST.get('opis')
-            if opis is not None:
-                Zanatlija.objects.filter(username__exact=username).update(opis=opis)
+            type = True
         except Zanatlija.DoesNotExist:
             user = None
-    print(request.user.username)
-    print(request)
 
-    print(request.POST.get('imeprezime'))
+    begin = '../../media/'
+    slika_path = begin + str(user.slika).strip('b').strip('\'')
+
+    if request.method == 'POST':
+        print("STIGAO POST REQUEST")
+        if not type:
+                imeprezime = request.POST.get('imeprezime')
+                if imeprezime != '':
+                    ime = str(imeprezime).split(' ')[0]
+                    prezime = str(imeprezime).split(' ')[1]
+                    Korisnik.objects.filter(username__exact=username).update(ime=ime, prezime=prezime)
+                else:
+                    error = 'Molimo vas unesite sva polja!'
+                mail = request.POST.get('mail')
+                if mail != '':
+                    Korisnik.objects.filter(username__exact=username).update(email=mail)
+                else:
+                    error = 'Molimo vas unesite sva polja!'
+                tel = request.POST.get('tel')
+                if tel != '':
+                    Korisnik.objects.filter(username__exact=username).update(telefon=tel)
+                else:
+                    error = 'Molimo vas unesite sva polja!'
+                opis = request.POST.get('opis')
+                if opis != '':
+                    Korisnik.objects.filter(username__exact=username).update(opis=opis)
+                else:
+                    error = 'Molimo vas unesite sva polja!'
+
+                context = {
+                    'username': user.username,
+                    'ime': user.ime,
+                    'prezime': user.prezime,
+                    'mail': user.email,
+                    'tel': user.telefon,
+                    'opis': user.opis,
+                    'error': error,
+                    'slika': slika_path
+                }
+
+                if error != '':
+                    return render(request, 'editProfile.html', context)
+                else:
+                    return redirect('myprofile', korisnik=user.username)
+        if type:
+                imeprezime = request.POST.get('imeprezime')
+                if imeprezime != '':
+                    ime = str(imeprezime).split(' ')[0]
+                    prezime = str(imeprezime).split(' ')[1]
+                    Zanatlija.objects.filter(username__exact=username).update(ime=ime, prezime=prezime)
+                else:
+                    error = 'Molimo vas unesite sva polja!'
+                mail = request.POST.get('mail')
+                if mail != '':
+                    Zanatlija.objects.filter(username__exact=username).update(email=mail)
+                else:
+                    error = 'Molimo vas unesite sva polja!'
+                tel = request.POST.get('tel')
+                if tel != '':
+                    Zanatlija.objects.filter(username__exact=username).update(telefon=tel)
+                else:
+                    error = 'Molimo vas unesite sva polja!'
+                opis = request.POST.get('opis')
+                if opis != '':
+                    Zanatlija.objects.filter(username__exact=username).update(opis=opis)
+                else:
+                    error = 'Molimo vas unesite sva polja!'
+
+                context = {
+                    'username': user.username,
+                    'ime': user.ime,
+                    'prezime': user.prezime,
+                    'mail': user.email,
+                    'tel': user.telefon,
+                    'opis': user.opis,
+                    'error': error,
+                    'slika': slika_path
+                }
+
+                if error != '':
+                    return render(request, 'editProfile.html', context)
+                else:
+                    return redirect('myprofile', korisnik=user.username)
+
     context = {
         'username': user.username,
         'ime': user.ime,
@@ -375,5 +526,12 @@ def edit(request: HttpRequest):
         'mail': user.email,
         'tel': user.telefon,
         'opis': user.opis,
+        'error': error,
+        'slika': slika_path
     }
     return render(request, 'editProfile.html', context)
+
+
+def logout_req(request):
+    logout(request)
+    return redirect('login')

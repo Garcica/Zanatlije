@@ -3,6 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="0cad5737-1250-41cc-bf74-58e78881523e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zanatlije/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zanatlije/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZanatlijeApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZanatlijeApp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/skriptaPrototip.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/skriptaPrototip.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/adminOdobravanjePrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/adminOdobravanjePrototip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/adminPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/adminPrototip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/changePrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/changePrototip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/chatsPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/chatsPrototip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/editProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/editProfile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/jobsPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/jobsPrototip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/loginPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/loginPrototip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/myPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/myPrototip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/profilePrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/profilePrototip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/searchLoggedPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/searchLoggedPrototip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signupPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signupPrototip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/singleChatPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/singleChatPrototip.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +31,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -33,6 +49,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
@@ -77,7 +94,12 @@
       <workItem from="1654175643645" duration="3757000" />
       <workItem from="1654186864597" duration="1012000" />
       <workItem from="1654196172212" duration="1578000" />
-      <workItem from="1654274190471" duration="739000" />
+      <workItem from="1654274190471" duration="761000" />
+      <workItem from="1654439378515" duration="1566000" />
+      <workItem from="1654567849609" duration="2093000" />
+      <workItem from="1654623715501" duration="4941000" />
+      <workItem from="1654635408515" duration="5027000" />
+      <workItem from="1654650430200" duration="2340000" />
     </task>
     <servers />
   </component>

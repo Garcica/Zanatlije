@@ -42,7 +42,13 @@
     <!---FORMA ZA REGISTRACIJU-->
     <form method="POST" class="container mt-5 py-3" style="border-radius: 15px; background-color:rgb(254, 206, 0); border: 5px solid black">
         {% csrf_token %}
+
         <table class="table mx-auto table-borderless text-center" style="width: 350px; background-color:black;border-radius: 15px;">
+            <tr>
+                <td class="error" style="display: flex; justify-content: center; color: red;">
+                    {{ context }}
+                </td>
+            </tr>
             <tr>
                 <td>
                     <input type="text" name="username" id="username" placeholder="Korisničko ime">
@@ -70,7 +76,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="radio" class="btn-check" name="pol" id="success-outlined" value="M" autocomplete="off" checked>
+                    <input type="radio" class="btn-check" name="pol" id="success-outlined" value="M" autocomplete="off" checked >
                     <label class="btn btn-outline-success green" for="success-outlined">MUŠKO</label>
                     <input type="radio" class="btn-check" name="pol" id="danger-outlined" value="Z" autocomplete="off">
                     <label class="btn btn-outline-danger red" for="danger-outlined">ŽENSKO</label>
@@ -170,7 +176,7 @@
             </tr>
             <tr>
                 <td>
-                    <button class="btn" style="background-color: rgb(254, 206, 0); font-weight: 600;" id="login">
+                    <button class="btn" style="background-color: rgb(254, 206, 0); font-weight: 600;" id="login" onclick="regCheck()">
                         REGISTRUJ SE
                     </button>
                 </td>

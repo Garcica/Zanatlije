@@ -35,7 +35,7 @@
                 <a class="nav-link" href="chatsPrototip.html">ĆASKANJA</a>
             </li>
             <li class="nav-right">
-                <a class="nav-link" href="{% url 'myprofile' %}">MOJ PROFIL</a>
+                <a class="nav-link" href="{% url 'myprofile' korisnik%}">MOJ PROFIL</a>
             </li>
             <li class="nav-item">
                 <a id="active" class="nav-link" href="{% url 'adminPanel' %}">ADMIN</a>
@@ -44,7 +44,7 @@
                 <a  class="nav-link" href="{% url 'adminOdobravanje' %}">REGISTRACIJE</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">ODJAVA</a>
+                <a class="nav-link" href="{% url 'logout' %}">ODJAVA</a>
             </li>
 
         </ul>
@@ -66,10 +66,10 @@
                 {% if users %} {% for user in users %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td><a href="#">{{ user.username }}</a></td>
+                    <td><a href="{% url 'someones_profile' user.username %}">{{ user.username }}</a></td>
                     <form method="POST">
                         {% csrf_token %}
-                        <td><input type="date" class="datepicker" name="Date"><input type="submit" class="btn btn-table" name="Banuj" value="Banuj"></td>
+                        <td><input id="date" type="date" class="datepicker" name="Date"><input type="submit" class="btn btn-table" name="Banuj" value="Banuj"></td>
                         <td><input type="submit" class="btn btn-table" name="Obrisi" value="Obrisi"></td>
                         <td><input type="submit" class="btn btn-table" name="Dodaj" value="Dodaj"><input type="submit" class="btn btn-table" name="Ukloni" value="Ukloni"></td>
                         <input type="hidden" name="username" value="{{ user.username }}">
@@ -79,6 +79,23 @@
             </tbody>
         </table>
     </div>
+    <script>
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("date").setAttribute("min", today);
+    </script>
 </body>
 
 </html>

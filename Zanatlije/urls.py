@@ -21,11 +21,15 @@ from django.urls import path
 from ZanatlijeApp import views
 
 urlpatterns = [
+    path('', views.login_req, name='home'),
+    path('/', views.login_req, name='home'),
     path('odobravanje/', views.admin_odobravanje, name="adminOdobravanje"),
     path('adminPanel/', views.admin, name="adminPanel"),
     path('admin/', admin.site.urls),
     path('login/', views.login_req, name='login'),
     path('register/', views.reister_req, name='register'),
-    path('profile/', views.profile, name='myprofile'),
-    path('edit/', views.edit, name='edit')
+    path('myprofile/<korisnik>/', views.profile, name='myprofile'),
+    path('edit/', views.edit, name='edit'),
+    path('profile/<neki_profil>/', views.someones_profile, name='someones_profile'),
+    path('logout/', views.logout_req, name='logout')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -41,6 +41,11 @@
         {% csrf_token %} {{ form }}
         <table class="table mx-auto table-borderless text-center" style="width: 350px;">
             <tr>
+                <td class="error" style="display: flex; justify-content: center; color: red;">
+                    {{ str }}
+                </td>
+            </tr>
+            <tr>
                 <td>
                     <input type="text" name="username" id="username" placeholder="Korisničko ime">
                 </td>

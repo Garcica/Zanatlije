@@ -35,7 +35,7 @@
                 <a class="nav-link" href="chatsPrototip.html">ĆASKANJA</a>
             </li>
             <li class="nav-right">
-                <a class="nav-link" href="{% url 'myprofile' %}">MOJ PROFIL</a>
+                <a class="nav-link" href="{% url 'myprofile' korisnik %}">MOJ PROFIL</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'adminPanel' %}">ADMIN</a>
@@ -44,7 +44,7 @@
                 <a id="active" class="nav-link" href="{% url 'adminOdobravanje' %}">REGISTRACIJE</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">ODJAVA</a>
+                <a class="nav-link" href="{% url 'logout' %}">ODJAVA</a>
             </li>
 
         </ul>
@@ -65,7 +65,7 @@
                 {% for user in  users %}
                     <tr>
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td><a href="#">{{  user.username }}</a></td>
+                    <td><a href="{% url 'someones_profile' user.username %}">{{  user.username }}</a></td>
                     <td>
                         <form method="POST">
                             {% csrf_token %}
