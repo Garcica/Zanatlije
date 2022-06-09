@@ -26,7 +26,7 @@
         </a>
         <ul class="navbar-nav">
             <li class="nav-right">
-                <a class="nav-link" href="searchLoggedPrototip.html">PRETRAGA</a>
+                <a class="nav-link" href="{% url 'search' %}">PRETRAGA</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="jobsPrototip.html">SARADNJE</a>
@@ -37,12 +37,21 @@
             <li class="nav-right">
                 <a class="nav-link" href="{% url 'myprofile' korisnik %}">MOJ PROFIL</a>
             </li>
+            {% if status == "E" %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'adminPanel' %}">ADMIN</a>
             </li>
+            {% endif %}
+            {% if status == "M" %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'moderatorPanel' %}">MODERATOR</a>
+            </li>
+            {% endif %}
+            {% if status == "E" or status == "M" %}
             <li class="nav-item">
                 <a id="active" class="nav-link" href="{% url 'adminOdobravanje' %}">REGISTRACIJE</a>
             </li>
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">ODJAVA</a>
             </li>

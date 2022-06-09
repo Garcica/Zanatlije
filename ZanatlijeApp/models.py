@@ -160,7 +160,7 @@ class Korisnik(models.Model):
     datum_ban = models.DateField(blank=True, null=True)
     ocena = models.IntegerField(blank=True, null=True)
     br_ocena = models.IntegerField(blank=True, null=True)
-
+    put_do_slike = models.CharField(max_length=255)
     class Meta:
         managed = False
         db_table = 'korisnik'
@@ -169,7 +169,8 @@ class Korisnik(models.Model):
 class Saradnja(models.Model):
     idsaradnja = models.AutoField(db_column='idSaradnja', primary_key=True)  # Field name made lowercase.
     idkorisnik = models.ForeignKey(Korisnik, models.DO_NOTHING, db_column='idKorisnik')  # Field name made lowercase.
-    idzanatlija = models.ForeignKey('Zanatlija', models.DO_NOTHING, db_column='idZanatlija')  # Field name made lowercase.
+    idzanatlija = models.ForeignKey('Zanatlija', models.DO_NOTHING,
+                                    db_column='idZanatlija')  # Field name made lowercase.
     datum = models.DateField()
     status = models.CharField(max_length=1)
 
@@ -197,7 +198,13 @@ class Zanatlija(models.Model):
     datum_ban = models.DateField(blank=True, null=True)
     ocena = models.IntegerField(blank=True, null=True)
     br_ocena = models.IntegerField(blank=True, null=True)
-
+    put_do_slike = models.CharField(max_length=255)
     class Meta:
         managed = False
         db_table = 'zanatlija'
+
+    def __eq__(self, other):
+        return self.username == other.username
+
+    def __hash__(self):
+        return hash(('username', self.username))

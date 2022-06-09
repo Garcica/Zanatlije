@@ -39,12 +39,12 @@
             </li>
             {% if status == "E" %}
             <li class="nav-item">
-                <a id="active" class="nav-link" href="{% url 'adminPanel' %}">ADMIN</a>
+                <a class="nav-link" href="{% url 'adminPanel' %}">ADMIN</a>
             </li>
             {% endif %}
             {% if status == "M" %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'moderatorPanel' %}">MODERATOR</a>
+                <a id="active" class="nav-link" href="{% url 'moderatorPanel' %}">MODERATOR</a>
             </li>
             {% endif %}
             {% if status == "E" or status == "M" %}
@@ -68,8 +68,6 @@
                     <th scope="col">Korisnicko ime</th>
                     <th scope="col">Banuj</th>
                     <th scope="col">Obrisi</th>
-                    <th scope="col">Dodaj/Ukloni moderatorske privilegije</th>
-                    <th scope="col">Dodaj administratorske privilegije</th>
                 </tr>
             </thead>
             <tbody>
@@ -81,8 +79,6 @@
                         {% csrf_token %}
                         <td><input id="date" type="date" class="datepicker" name="Date"><input type="submit" class="btn btn-table" name="Banuj" value="Banuj"></td>
                         <td><input type="submit" class="btn btn-table" name="Obrisi" value="Obrisi"></td>
-                        <td><input type="submit" class="btn btn-table" name="Dodaj" value="Dodaj"><input type="submit" class="btn btn-table" name="Ukloni" value="Ukloni"></td>
-                        <td><input type="submit" class="btn btn-table" name="Admin" value="Admin"></td>
                         <input type="hidden" name="username" value="{{ user.username }}">
                     </form>
                 </tr>

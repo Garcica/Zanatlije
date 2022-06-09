@@ -27,9 +27,12 @@ urlpatterns = [
     path('adminPanel/', views.admin, name="adminPanel"),
     path('admin/', admin.site.urls),
     path('login/', views.login_req, name='login'),
-    path('register/', views.reister_req, name='register'),
+    path('register/', views.register_req, name='register'),
     path('myprofile/<korisnik>/', views.profile, name='myprofile'),
     path('edit/', views.edit, name='edit'),
     path('profile/<neki_profil>/', views.someones_profile, name='someones_profile'),
-    path('logout/', views.logout_req, name='logout')
+    path('logout/', views.logout_req, name='logout'),
+    path('self_delete/', views.self_delete_req, name='self_delete_req'),
+    path('moderatorPanel/', views.moderator, name='moderatorPanel'),
+    path('search/', views.search, name='search')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

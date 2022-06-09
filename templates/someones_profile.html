@@ -26,7 +26,7 @@
         </a>
         <ul class="navbar-nav">
             <li class="nav-right">
-                <a class="nav-link" href="searchLoggedPrototip.html">PRETRAGA</a>
+                <a class="nav-link" href="{% url 'search' %}">PRETRAGA</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="jobsPrototip.html">SARADNJE</a>
@@ -37,12 +37,21 @@
             <li class="nav-right">
                 <a class="nav-link" href="{% url 'myprofile' korisnik %}">MOJ PROFIL</a>
             </li>
+            {% if status == "E" %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'adminPanel' %}">ADMIN</a>
             </li>
+            {% endif %}
+            {% if status == "M" %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'moderatorPanel' %}">MODERATOR</a>
+            </li>
+            {% endif %}
+            {% if status == "E" or status == "M" %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'adminOdobravanje' %}">REGISTRACIJE</a>
             </li>
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">ODJAVA</a>
             </li>
@@ -83,7 +92,7 @@
                                 </svg></a>
                         </div>
                         <div class="d-flex justify-content-between border-bottom py-2 px-3">
-                            <p class="fw-bold">Instagram</p> <a class="coms3" href="">@37_joca <svg
+                            <p class="fw-bold">Instagram</p> <a class="coms3" href="">@{{ username }} <svg
                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-instagram" viewBox="0 0 16 16">
                                     <path
@@ -91,7 +100,7 @@
                                 </svg></a>
                         </div>
                         <div class="d-flex justify-content-between py-2 px-3">
-                            <p class="fw-bold">Facebook</p> <a class="coms3" href="">bootdey <svg
+                            <p class="fw-bold">Facebook</p> <a class="coms3" href="">{{ username }} <svg
                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-facebook" viewBox="0 0 16 16">
                                     <path
@@ -120,6 +129,24 @@
                             <p class="py-2 fw-bold">Opis</p>
                             <p class="py-2">{{ opis }}</p>
                         </div>
+                        {% if logged_in_as %}
+                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                            <p class="py-2 fw-bold">Naziv firme</p>
+                            <p class="py-2">{{ ime_firme }}</p>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                            <p class="py-2 fw-bold">Adresa firme</p>
+                            <p class="py-2">{{ adresa_firme }}</p>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                            <p class="py-2 fw-bold">Grad</p>
+                            <p class="py-2">{{ grad }}</p>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <p class="py-2 fw-bold">Zanati</p>
+                            <p class="py-2">{{ zanati }}</p>
+                        </div>
+                        {% endif %}
                         <!--
                         <div class="d-flex align-items-center justify-content-between">
                             <p class="py-2">Adresa</p>
@@ -185,6 +212,7 @@
     </div>
 
     <!-- POPUP ALERT -->
+    <!--
     <div class="modal fade" id="obrisiAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -205,6 +233,7 @@
             </div>
         </div>
     </div>
+    -->
 
 
 </body>

@@ -9,7 +9,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="stylePrototip.css" rel="stylesheet">
+    {% load static %}
+    <link href="{% static 'stylePrototip.css' %}" rel="stylesheet">
 
 </head>
 
@@ -19,11 +20,12 @@
     <div class="container-fluid py-1 navImg"></div>
     <nav class="navbar navbar-expand-sm bg-black p-0">
         <a class="navbar-brand ms-1 me-0" href="index.html">
-            <img src="slike/Logo.png" alt="Logo.png" style="width:80px" title="Zanatlije">
+            {% load static %}
+            <img src="{% static 'slike/Logo.png' %}" alt="Logo.png" style="width:80px" title="Zanatlije">
         </a>
         <ul class="navbar-nav">
             <li class="nav-right">
-                <a id="active" class="nav-link" href="searchLoggedPrototip.html">PRETRAGA</a>
+                <a id="active" class="nav-link" href="{% url 'search' %}">PRETRAGA</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="jobsPrototip.html">SARADNJE</a>
@@ -32,14 +34,23 @@
                 <a class="nav-link" href="chatsPrototip.html">ĆASKANJA</a>
             </li>
             <li class="nav-right">
-                <a class="nav-link" href="myPrototip.html">MOJ PROFIL</a>
+                <a class="nav-link" href="{% url 'myprofile' korisnik %}">MOJ PROFIL</a>
             </li>
+            {% if status == "E" %}
             <li class="nav-item">
-                <a class="nav-link" href="adminPrototip.html">ADMIN</a>
+                <a class="nav-link" href="{% url 'adminPanel' %}">ADMIN</a>
             </li>
+            {% endif %}
+            {% if status == "M" %}
             <li class="nav-item">
-                <a class="nav-link" href="adminOdobravanjePrototip.html">REGISTRACIJE</a>
+                <a class="nav-link" href="{% url 'moderatorPanel' %}">MODERATOR</a>
             </li>
+            {% endif %}
+            {% if status == "E" or status == "M" %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'adminOdobravanje' %}">REGISTRACIJE</a>
+            </li>
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">ODJAVA</a>
             </li>
@@ -50,36 +61,40 @@
 
     <!--PRETRAGA-->
     <div class="container bg-black mt-5 py-3" style="border-radius: 15px;">
-        <form action="searchPrototip.html" class="text-center">
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkMoler" autocomplete="off">
+        <form method="POST" action="{% url 'search' %}" class="text-center">
+            {% csrf_token %}
+            <div class="error" style="display: flex; justify-content: center; color: red;">
+                    {{ error }}
+            </div>
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkMoler" autocomplete="off" value="MOLER">
             <label class="btn btn-outline-success green formaZanatlije" for="checkMoler">MOLER</label>
-            <input type="checkbox" class="btn-check" name="options-outlined" id="checkStolar" autocomplete="off">
+            <input type="checkbox" class="btn-check" name="options-outlined" id="checkStolar" autocomplete="off" value="STOLAR">
             <label class="btn btn-outline-success green formaZanatlije" for="checkStolar">STOLAR</label>
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkBravar" autocomplete="off">
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkBravar" autocomplete="off" value="BRAVAR">
             <label class="btn btn-outline-success green formaZanatlije" for="checkBravar">BRAVAR</label>
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkVodoinstalater" autocomplete="off">
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkVodoinstalater" autocomplete="off" value="VODOINSTALATER">
             <label class="btn btn-outline-success green formaZanatlije" for="checkVodoinstalater">VODOINSTALATER</label>
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkElektricar" autocomplete="off">
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkElektricar" autocomplete="off" value="ELEKTRIČAR">
             <label class="btn btn-outline-success green formaZanatlije" for="checkElektricar">ELEKTRIČAR</label>
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkAutomehanicar" autocomplete="off">
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkAutomehanicar" autocomplete="off" value="AUTOMEHANIČAR">
             <label class="btn btn-outline-success green formaZanatlije" for="checkAutomehanicar">AUTOMEHANIČAR</label>
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkObucar" autocomplete="off">
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkObucar" autocomplete="off" value="OBUĆAR">
             <label class="btn btn-outline-success green formaZanatlije" for="checkObucar">OBUĆAR</label>
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkTasner" autocomplete="off">
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkTasner" autocomplete="off" value="TAŠNER">
             <label class="btn btn-outline-success green formaZanatlije" for="checkTasner">TAŠNER</label>
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkParketar" autocomplete="off">
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkParketar" autocomplete="off" value="PARKETAR">
             <label class="btn btn-outline-success green formaZanatlije" for="checkParketar">PARKETAR</label>
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkGipsar" autocomplete="off">
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkGipsar" autocomplete="off" value="GIPSAR">
             <label class="btn btn-outline-success green formaZanatlije" for="checkGipsar">GIPSAR</label>
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkManikir" autocomplete="off">
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkManikir" autocomplete="off" value="MANIKIR">
             <label class="btn btn-outline-success green formaZanatlije" for="checkManikir">MANIKIR</label>
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkPedikir" autocomplete="off">
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkPedikir" autocomplete="off" value="PEDIKIR">
             <label class="btn btn-outline-success green formaZanatlije" for="checkPedikir">PEDIKIR</label>
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkFrizer" autocomplete="off">
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkFrizer" autocomplete="off" value="FRIZER">
             <label class="btn btn-outline-success green formaZanatlije" for="checkFrizer">FRIZER</label>
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkKrojac" autocomplete="off">
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkKrojac" autocomplete="off" value="KROJAČ">
             <label class="btn btn-outline-success green formaZanatlije" for="checkKrojac">KROJAČ</label>
-            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkOstalo" autocomplete="off">
+            <input type="checkbox" class="btn-check formaZanatlije" name="options-outlined" id="checkOstalo" autocomplete="off" value="OSTALO">
             <label class="btn btn-outline-success green formaZanatlije" for="checkOstalo">OSTALO</label>
             <br>
             <select class="mt-3" id="sel" name="sellist">
@@ -106,64 +121,30 @@
 
     <!--REZULTATI-->
     <div class="container bg-black mt-3 pt-3" style="border-radius: 15px;">
-        <div class="row">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="kartica">
-                    <div class="picture">
-                        <img class="img-fluid" src="slike/Slika6.jpg">
+        {% if zanatlije and submited %}
+            <div class="row">
+                {% for zanatlija in zanatlije %}
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="kartica">
+                            <div class="picture">
+                                <img class="img-fluid" src="{{zanatlija.put_do_slike}}">
+                            </div>
+                            <hr>
+                            <div class="kartica-text">
+                                <h3 class="name">{{ zanatlija.ime }} {{ zanatlija.prezime }}</h3>
+                                <hr>
+                                <p class="comment">{{ zanatlija.opis }}</p>
+                            </div>
+                            <a class="btn bg-black" style="color:rgb(254, 206, 0)" href="{% url 'someones_profile' zanatlija.username %}"> POSETI STRANICU</a>
+                        </div>
                     </div>
-                    <hr>
-                    <div class="kartica-text">
-                        <h3 class="name">Mister Proper</h3>
-                        <hr>
-                        <p class="comment">Vaš omiljeni ćelavi moler.</p>
-                    </div>
-                    <a class="btn bg-black" style="color:rgb(254, 206, 0)" href="profilePrototip.html"> POSETI STRANICU</a>
-                </div>
+                {% endfor %}
             </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="kartica">
-                    <div class="picture">
-                        <img class="img-fluid" src="slike/Slika5.jpg">
-                    </div>
-                    <hr>
-                    <div class="kartica-text">
-                        <h3 class="name">Mister Proper</h3>
-                        <hr>
-                        <p class="comment">Vaš omiljeni ćelavi moler.</p>
-                    </div>
-                    <a class="btn bg-black" style="color:rgb(254, 206, 0)" href="profilePrototip.html"> POSETI STRANICU</a>
-                </div>
+        {% elif submited %}
+            <div class="error" style="display: flex; justify-content: center; color: red;">
+                    Zao nam je, nemamo rezultata za vasu pretragu :(
             </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="kartica">
-                    <div class="picture">
-                        <img class="img-fluid" src="slike/Slika10.jpg">
-                    </div>
-                    <hr>
-                    <div class="kartica-text">
-                        <h3 class="name">Mister Proper</h3>
-                        <hr>
-                        <p class="comment">Vaš omiljeni ćelavi moler.</p>
-                    </div>
-                    <a class="btn bg-black" style="color:rgb(254, 206, 0)" href="profilePrototip.html"> POSETI STRANICU</a>
-                </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                <div class="kartica">
-                    <div class="picture">
-                        <img class="img-fluid" src="slike/Slika10.jpg">
-                    </div>
-                    <hr>
-                    <div class="kartica-text">
-                        <h3 class="name">Mister Proper</h3>
-                        <hr>
-                        <p class="comment">Vaš omiljeni ćelavi moler.</p>
-                    </div>
-                    <a class="btn bg-black" style="color:rgb(254, 206, 0)" href="profilePrototip.html"> POSETI STRANICU</a>
-                </div>
-            </div>
-        </div>
+        {% endif %}
     </div>
 </body>
 
