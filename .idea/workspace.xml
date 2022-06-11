@@ -2,25 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0cad5737-1250-41cc-bf74-58e78881523e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Zanatlije.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Zanatlije.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zanatlije/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zanatlije/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zanatlije/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zanatlije/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZanatlijeApp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZanatlijeApp/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ZanatlijeApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZanatlijeApp/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ZanatlijeApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ZanatlijeApp/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/stylePrototip.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/stylePrototip.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/adminOdobravanjePrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/adminOdobravanjePrototip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/adminPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/adminPrototip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/chatsPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/chatsPrototip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/editProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/editProfile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/loginPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/loginPrototip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/moderatorPanel.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/moderatorPanel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/myPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/myPrototip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/searchLoggedPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/searchLoggedPrototip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/singleChatPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/singleChatPrototip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/someones_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/someones_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/adminOdobravanjePrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registrations.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/adminPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/administrator_panel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/changePrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/chatsPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/chats.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/editProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/jobsPrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/loginPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/moderatorPanel.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/moderator_panel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/myPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/my_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/profilePrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/searchLoggedPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/searchPrototip.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/signupPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/signupPrototip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/singleChatPrototip.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/single_chat.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,10 +107,22 @@
       <workItem from="1654898380121" duration="553000" />
       <workItem from="1654898966003" duration="20198000" />
       <workItem from="1654970513898" duration="13957000" />
+      <workItem from="1654989680346" duration="263000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

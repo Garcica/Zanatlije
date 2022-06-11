@@ -86,7 +86,7 @@ def admin_odobravanje(request):
         'status': status
     }
 
-    return render(request, 'adminOdobravanjePrototip.html', context)
+    return render(request, 'registrations.html', context)
 
 
 def admin(request):
@@ -214,7 +214,7 @@ def admin(request):
         'status': status
     }
 
-    return render(request, 'adminPrototip.html', context)
+    return render(request, 'administrator_panel.html', context)
 
 
 class UserBackend:
@@ -297,7 +297,7 @@ def login_req(request: HttpRequest):
                 str = 'Ne mozete da pristupite nalogu jer ste banovani!'
 
         if str != '':
-            return render(request, 'loginPrototip.html', context={'str': str})
+            return render(request, 'login.html', context={'str': str})
         # user = Zanatlija.objects.get(username=username)
         # print(user.sifra)
         user = UserBackend.authenticateZanatlija(
@@ -309,7 +309,7 @@ def login_req(request: HttpRequest):
 
         if user is None:
             str = 'Nismo pronasli vas nalog'
-            return render(request, 'loginPrototip.html', context={'str': str})
+            return render(request, 'login.html', context={'str': str})
 
         context = {
             'username': user.username,
@@ -327,7 +327,7 @@ def login_req(request: HttpRequest):
         request.session['status'] = user.status
         return redirect('myprofile', korisnik=user.username)
 
-    return render(request, 'loginPrototip.html', context={'str': str})
+    return render(request, 'login.html', context={'str': str})
 
 
 def register_req(request: HttpRequest):
@@ -545,7 +545,7 @@ def profile(request: HttpRequest, korisnik):
         'ocena': user.ocena,
         'komentari': komentari
     }
-    return render(request, 'myPrototip.html', context)
+    return render(request, 'my_profile.html', context)
 
 
 def someones_profile(request: HttpRequest, neki_profil):
@@ -778,7 +778,7 @@ def edit(request: HttpRequest):
             }
 
             if error != '':
-                return render(request, 'editProfile.html', context)
+                return render(request, 'edit.html', context)
             else:
                 return redirect('myprofile', korisnik=user.username)
         if type:
@@ -882,7 +882,7 @@ def edit(request: HttpRequest):
             # print(type)
 
             if error != '':
-                return render(request, 'editProfile.html', context)
+                return render(request, 'edit.html', context)
             else:
                 return redirect('myprofile', korisnik=user.username)
 
@@ -901,7 +901,7 @@ def edit(request: HttpRequest):
         'type': type,
         'status': status
     }
-    return render(request, 'editProfile.html', context)
+    return render(request, 'edit.html', context)
 
 
 def logout_req(request):
@@ -1004,7 +1004,7 @@ def moderator(request):
         'status': status
     }
 
-    return render(request, 'moderatorPanel.html', context)
+    return render(request, 'moderator_panel.html', context)
 
 
 def search(request):
@@ -1033,7 +1033,7 @@ def search(request):
                 'error': error,
                 'submited': submited
             }
-            return render(request, 'searchLoggedPrototip.html', context)
+            return render(request, 'search.html', context)
 
         zanat = ''
         for z in zanati:
@@ -1080,7 +1080,7 @@ def search(request):
             'submited': submited
         }
 
-        return render(request, 'searchLoggedPrototip.html', context)
+        return render(request, 'search.html', context)
 
     context = {
         'korisnik': korisnik,
@@ -1089,7 +1089,7 @@ def search(request):
         'submited': submited
     }
 
-    return render(request, 'searchLoggedPrototip.html', context)
+    return render(request, 'search.html', context)
 
 
 def caskanjeDetalj(request: HttpRequest, username):
@@ -1122,7 +1122,7 @@ def caskanjeDetalj(request: HttpRequest, username):
     context['korisnik'] = sender_username
     context['status'] = sender.status
 
-    return render(request, 'singleChatPrototip.html', context)
+    return render(request, 'single_chat.html', context)
 
 
 def poruke(request: HttpRequest):
@@ -1202,7 +1202,7 @@ def chats(request):
         'chats': final_list
     }
 
-    return render(request, 'chatsPrototip.html', context)
+    return render(request, 'chats.html', context)
 
 
 def oceni(request):
