@@ -1,20 +1,22 @@
 import os
 import re
 from itertools import chain
-import datetime
+from datetime import datetime
 from django.core.files.base import ContentFile, File
-from django.db.models import Q
+from django.db.models import Q, Avg, Count
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.hashers import check_password
 from django.contrib.messages.storage import session
-from django.http import HttpResponse, HttpRequest, request
+from django.http import HttpResponse, HttpRequest, JsonResponse, request
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 from django.utils.dateparse import parse_date
-from ZanatlijeApp.models import Korisnik, Zanatlija
+from ZanatlijeApp.models import *
+import json
 
 
 def admin_odobravanje(request):
@@ -28,12 +30,14 @@ def admin_odobravanje(request):
             user = None
             if user is None:
                 try:
-                    Korisnik.objects.filter(username=username).update(status="A")
+                    Korisnik.objects.filter(
+                        username=username).update(status="A")
                 except Korisnik.DoesNotExist:
                     user = None
             if user is None:
                 try:
-                    Zanatlija.objects.filter(username=username).update(status="A")
+                    Zanatlija.objects.filter(
+                        username=username).update(status="A")
                 except Zanatlija.DoesNotExist:
                     user = None
 
@@ -63,7 +67,8 @@ def admin_odobravanje(request):
         workers_not_approved = None
 
     if users_not_approved is not None and workers_not_approved is not None:
-        total_not_approved = list(chain(users_not_approved, workers_not_approved))
+        total_not_approved = list(
+            chain(users_not_approved, workers_not_approved))
     elif users_not_approved is not None and workers_not_approved is None:
         total_not_approved = list(users_not_approved)
     elif users_not_approved is None and workers_not_approved is not None:
@@ -116,12 +121,14 @@ def admin(request):
             user = None
             if user is None:
                 try:
-                    Korisnik.objects.filter(username=username).update(status="M")
+                    Korisnik.objects.filter(
+                        username=username).update(status="M")
                 except Korisnik.DoesNotExist:
                     user = None
             if user is None:
                 try:
-                    Zanatlija.objects.filter(username=username).update(status="M")
+                    Zanatlija.objects.filter(
+                        username=username).update(status="M")
                 except Zanatlija.DoesNotExist:
                     user = None
 
@@ -129,12 +136,14 @@ def admin(request):
             user = None
             if user is None:
                 try:
-                    Korisnik.objects.filter(username=username).update(status="A")
+                    Korisnik.objects.filter(
+                        username=username).update(status="A")
                 except Korisnik.DoesNotExist:
                     user = None
             if user is None:
                 try:
-                    Zanatlija.objects.filter(username=username).update(status="A")
+                    Zanatlija.objects.filter(
+                        username=username).update(status="A")
                 except Zanatlija.DoesNotExist:
                     user = None
 
@@ -143,16 +152,19 @@ def admin(request):
             dateStr = request.POST.get("Date", "")
             dateStrArr = dateStr.split("-")
 
-            date = datetime.date(int(dateStrArr[0]), int(dateStrArr[1]), int(dateStrArr[2]))
+            date = datetime.date(int(dateStrArr[0]), int(
+                dateStrArr[1]), int(dateStrArr[2]))
 
             if user is None:
                 try:
-                    Korisnik.objects.filter(username=username).update(datum_ban=date)
+                    Korisnik.objects.filter(
+                        username=username).update(datum_ban=date)
                 except Korisnik.DoesNotExist:
                     user = None
             if user is None:
                 try:
-                    Zanatlija.objects.filter(username=username).update(datum_ban=date)
+                    Zanatlija.objects.filter(
+                        username=username).update(datum_ban=date)
                 except Zanatlija.DoesNotExist:
                     user = None
 
@@ -161,12 +173,14 @@ def admin(request):
 
             if user is None:
                 try:
-                    Korisnik.objects.filter(username=username).update(status="E")
+                    Korisnik.objects.filter(
+                        username=username).update(status="E")
                 except Korisnik.DoesNotExist:
                     user = None
             if user is None:
                 try:
-                    Zanatlija.objects.filter(username=username).update(status="E")
+                    Zanatlija.objects.filter(
+                        username=username).update(status="E")
                 except Zanatlija.DoesNotExist:
                     user = None
 
@@ -286,9 +300,11 @@ def login_req(request: HttpRequest):
             return render(request, 'loginPrototip.html', context={'str': str})
         # user = Zanatlija.objects.get(username=username)
         # print(user.sifra)
-        user = UserBackend.authenticateZanatlija(self=UserBackend(), username=username, password=password)
+        user = UserBackend.authenticateZanatlija(
+            self=UserBackend(), username=username, password=password)
         if user is None:
-            user = UserBackend.authenticateKorisnik(self=UserBackend(), username=username, password=password)
+            user = UserBackend.authenticateKorisnik(
+                self=UserBackend(), username=username, password=password)
         # print(user)
 
         if user is None:
@@ -396,7 +412,7 @@ def register_req(request: HttpRequest):
         else:
             slika = 'default.jpg'
 
-        #slika_ime = request.POST.get('formFile')
+        # slika_ime = request.POST.get('formFile')
 
         zanati = request.POST.getlist('options-outlined')
         zanat = ''
@@ -441,16 +457,18 @@ def register_req(request: HttpRequest):
                 slika_ime = str(username) + '.' + str(slika).split(".")[1]
                 slika_path = '../../media/zanatlije_img/' + str(slika_ime)
                 user = Zanatlija.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol,
-                                               grad=grad, email=mail, telefon=phone, opis=desc, status="N",
-                                               put_do_slike=slika_path, zanati=zanat, ime_firme=firma, adresa_lokala=adresa)
+                                                grad=grad, email=mail, telefon=phone, opis=desc, status="N",
+                                                put_do_slike=slika_path, zanati=zanat, ime_firme=firma,
+                                                adresa_lokala=adresa)
                 user.slika.save(slika_ime, slika)
                 user.save()
             else:
                 slika_ime = 'default.jpg'
                 slika_path = '/static/slike/default.jpg'
                 user = Zanatlija.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol,
-                                               grad=grad, email=mail, telefon=phone, opis=desc, slika=None, status="N",
-                                               put_do_slike=slika_path, zanati=zanat, ime_firme=firma, adresa_lokala=adresa)
+                                                grad=grad, email=mail, telefon=phone, opis=desc, slika=None, status="N",
+                                                put_do_slike=slika_path, zanati=zanat, ime_firme=firma,
+                                                adresa_lokala=adresa)
                 user.save()
 
         error = 'Registracija je uspesna. Sacekajte da vam administrator/moderator odobri registraciju!'
@@ -486,6 +504,12 @@ def profile(request: HttpRequest, korisnik):
             user = None
     # print(user.username)
     # print(user.slika.url)
+
+    if not logged_in_as:
+        komentari = Komentari.objects.filter(Q(idkorisnik=user) & Q(smer__exact='Z')).all().order_by('-datum_vreme')
+    else:
+        komentari = Komentari.objects.filter(Q(idzanatlija=user) & Q(smer__exact='K')).all().order_by('-datum_vreme')
+
     if user.slika is None or user.slika == b'':
         slika_path = '/static/slike/default.jpg'
     else:
@@ -517,7 +541,9 @@ def profile(request: HttpRequest, korisnik):
         'ime_firme': ime_firme,
         'adresa_firme': adresa_firme,
         'grad': grad,
-        'status': status
+        'status': status,
+        'ocena': user.ocena,
+        'komentari': komentari
     }
     return render(request, 'myPrototip.html', context)
 
@@ -526,8 +552,13 @@ def someones_profile(request: HttpRequest, neki_profil):
     korisnik = request.session['username']
     status = request.session['status']
     username = neki_profil
+    request.session['neki_profil'] = neki_profil
     logged_in_as = False
     user = None
+
+    if korisnik == username:
+        return redirect(profile, korisnik=korisnik)
+
     if user is None:
         try:
             user = Korisnik.objects.get(username=username)
@@ -540,6 +571,54 @@ def someones_profile(request: HttpRequest, neki_profil):
             logged_in_as = True
         except Zanatlija.DoesNotExist:
             user = None
+
+    me = None
+    me_type = False
+
+    if me is None:
+        try:
+            me = Korisnik.objects.get(username=korisnik)
+            me_type = False
+        except Korisnik.DoesNotExist:
+            me = None
+    if me is None:
+        try:
+            me = Zanatlija.objects.get(username=korisnik)
+            me_type = True
+        except Zanatlija.DoesNotExist:
+            me = None
+
+    if me_type == False and logged_in_as == False or me_type == True and logged_in_as == True:
+        dont_show = True
+    else:
+        dont_show = False
+
+    dont_show_rating = False
+
+    if not dont_show:
+        if me_type == True:
+            exists = Ocene.objects.filter(Q(idzanatlija=me) & Q(idkorisnik=user) & Q(smer__exact='Z'))
+
+            if exists is None or len(exists) == 0:
+                dont_show_rating = False
+            else:
+                dont_show_rating = True
+        else:
+            exists = Ocene.objects.filter(Q(idzanatlija=user) & Q(idkorisnik=me) & Q(smer__exact='K'))
+
+            if exists is None or len(exists) == 0:
+                dont_show_rating = False
+            else:
+                dont_show_rating = True
+    else:
+        dont_show_rating = True
+
+    if not logged_in_as:
+        komentari = Komentari.objects.filter(
+            Q(idkorisnik=user) & Q(smer__exact='Z')).all().order_by('-datum_vreme')
+    else:
+        komentari = Komentari.objects.filter(
+            Q(idzanatlija=user) & Q(smer__exact='K')).all().order_by('-datum_vreme')
 
     if user.slika is None or user.slika == b'':
         slika_path = '/static/slike/default.jpg'
@@ -573,7 +652,11 @@ def someones_profile(request: HttpRequest, neki_profil):
         'ime_firme': ime_firme,
         'adresa_firme': adresa_firme,
         'grad': grad,
-        'status': status
+        'status': status,
+        'dont_show': dont_show,
+        'ocena': user.ocena,
+        'dont_show_rating': dont_show_rating,
+        'komentari': komentari
     }
     return render(request, 'someones_profile.html', context)
 
@@ -621,7 +704,8 @@ def edit(request: HttpRequest):
             if imeprezime != '':
                 ime = str(imeprezime).split(' ')[0]
                 prezime = str(imeprezime).split(' ')[1]
-                Korisnik.objects.filter(username__exact=username).update(ime=ime, prezime=prezime)
+                Korisnik.objects.filter(username__exact=username).update(
+                    ime=ime, prezime=prezime)
             else:
                 error = 'Molimo vas unesite sva polja!'
             mail = request.POST.get('mail')
@@ -651,7 +735,8 @@ def edit(request: HttpRequest):
             checkUser = None
 
             if dobar:
-                Korisnik.objects.filter(username__exact=username).update(email=mail)
+                Korisnik.objects.filter(
+                    username__exact=username).update(email=mail)
 
             dobar = True
 
@@ -668,13 +753,15 @@ def edit(request: HttpRequest):
                 dobar = False
 
             if dobar:
-                Korisnik.objects.filter(username__exact=username).update(telefon=tel)
+                Korisnik.objects.filter(
+                    username__exact=username).update(telefon=tel)
 
             dobar = True
 
             opis = request.POST.get('opis')
             if opis != '':
-                Korisnik.objects.filter(username__exact=username).update(opis=opis)
+                Korisnik.objects.filter(
+                    username__exact=username).update(opis=opis)
             else:
                 error = 'Molimo vas unesite sva polja!'
 
@@ -699,7 +786,8 @@ def edit(request: HttpRequest):
             if imeprezime != '':
                 ime = str(imeprezime).split(' ')[0]
                 prezime = str(imeprezime).split(' ')[1]
-                Zanatlija.objects.filter(username__exact=username).update(ime=ime, prezime=prezime)
+                Zanatlija.objects.filter(username__exact=username).update(
+                    ime=ime, prezime=prezime)
             else:
                 error = 'Molimo vas unesite sva polja!'
             mail = request.POST.get('mail')
@@ -729,7 +817,8 @@ def edit(request: HttpRequest):
             checkUser = None
 
             if dobar:
-                Zanatlija.objects.filter(username__exact=username).update(email=mail)
+                Zanatlija.objects.filter(
+                    username__exact=username).update(email=mail)
 
             dobar = True
 
@@ -746,26 +835,31 @@ def edit(request: HttpRequest):
                 dobar = False
 
             if dobar:
-                Zanatlija.objects.filter(username__exact=username).update(telefon=tel)
+                Zanatlija.objects.filter(
+                    username__exact=username).update(telefon=tel)
 
             dobar = True
             opis = request.POST.get('opis')
             if opis != '':
-                Zanatlija.objects.filter(username__exact=username).update(opis=opis)
+                Zanatlija.objects.filter(
+                    username__exact=username).update(opis=opis)
             else:
                 error = 'Molimo vas unesite sva polja!'
 
             naziv_firme = request.POST.get('naziv_firme')
             if naziv_firme != '':
-                Zanatlija.objects.filter(username__exact=username).update(ime_firme=naziv_firme)
+                Zanatlija.objects.filter(username__exact=username).update(
+                    ime_firme=naziv_firme)
 
             adresa_firme = request.POST.get('adresa_firme')
             if adresa_firme != '':
-                Zanatlija.objects.filter(username__exact=username).update(adresa_lokala=adresa_firme)
+                Zanatlija.objects.filter(username__exact=username).update(
+                    adresa_lokala=adresa_firme)
 
             grad = request.POST.get('grad')
             if grad != '':
-                Zanatlija.objects.filter(username__exact=username).update(grad=grad)
+                Zanatlija.objects.filter(
+                    username__exact=username).update(grad=grad)
             else:
                 error = 'Molimo vas unesite sva polja!'
 
@@ -868,16 +962,19 @@ def moderator(request):
             dateStr = request.POST.get("Date", "")
             dateStrArr = dateStr.split("-")
 
-            date = datetime.date(int(dateStrArr[0]), int(dateStrArr[1]), int(dateStrArr[2]))
+            date = datetime.date(int(dateStrArr[0]), int(
+                dateStrArr[1]), int(dateStrArr[2]))
 
             if user is None:
                 try:
-                    Korisnik.objects.filter(username=username).update(datum_ban=date)
+                    Korisnik.objects.filter(
+                        username=username).update(datum_ban=date)
                 except Korisnik.DoesNotExist:
                     user = None
             if user is None:
                 try:
-                    Zanatlija.objects.filter(username=username).update(datum_ban=date)
+                    Zanatlija.objects.filter(
+                        username=username).update(datum_ban=date)
                 except Zanatlija.DoesNotExist:
                     user = None
     try:
@@ -921,7 +1018,6 @@ def search(request):
         submited = True
         zanati = request.POST.getlist('options-outlined')
 
-
         if len(zanati) == 0:
             error = 'Morate odabrati barem jedan zanat!'
 
@@ -949,7 +1045,8 @@ def search(request):
         total_zanatlije = []
 
         for z in zanati:
-            zanatlije = Zanatlija.objects.filter(Q(zanati__contains=z) & Q(grad__exact=grad) & ~Q(status__exact="N"))
+            zanatlije = Zanatlija.objects.filter(
+                Q(zanati__contains=z) & Q(grad__exact=grad) & ~Q(status__exact="N"))
 
             if zanatlije is not None:
                 total_zanatlije = list(chain(total_zanatlije, zanatlije))
@@ -960,7 +1057,8 @@ def search(request):
             zanatlije_no_duplicates_set = None
 
         if zanatlije_no_duplicates_set is not None:
-            zanatlije_no_duplicates = sorted(zanatlije_no_duplicates_set, key=lambda x: x.ocena, reverse=True)
+            zanatlije_no_duplicates = sorted(
+                zanatlije_no_duplicates_set, key=lambda x: x.ocena, reverse=True)
         else:
             zanatlije_no_duplicates = None
 
@@ -984,7 +1082,6 @@ def search(request):
 
         return render(request, 'searchLoggedPrototip.html', context)
 
-
     context = {
         'korisnik': korisnik,
         'status': status,
@@ -993,3 +1090,212 @@ def search(request):
     }
 
     return render(request, 'searchLoggedPrototip.html', context)
+
+
+def caskanjeDetalj(request: HttpRequest, username):
+    sender_username = request.session['username']
+    context = dict()
+
+    try:
+        korisnik = Korisnik.objects.get(username=sender_username)
+    except:
+        korisnik = None
+
+    try:
+        zanatlija = Zanatlija.objects.get(username=sender_username)
+    except:
+        zanatlija = None
+
+    sender = korisnik or zanatlija
+
+    if (isinstance(sender, Korisnik)):
+        primalac = Zanatlija.objects.get(username=username)
+        context['idzanatlija'] = primalac.idzanatlija
+        context['idkorisnik'] = korisnik.idkorisnik
+        context['smer'] = 0
+    elif (isinstance(sender, Zanatlija)):
+        primalac = Korisnik.objects.get(username=username)
+        context['idzanatlija'] = zanatlija.idzanatlija
+        context['idkorisnik'] = primalac.idkorisnik
+        context['smer'] = 1
+
+    context['korisnik'] = sender_username
+    context['status'] = sender.status
+
+    return render(request, 'singleChatPrototip.html', context)
+
+
+def poruke(request: HttpRequest):
+    if request.method == 'GET':
+        parametri = {
+            'idkorisnik__idkorisnik': request.GET['idkorisnik'],
+            'idzanatlija__idzanatlija': request.GET['idzanatlija']
+        }
+        poruke = list(Caskanje.objects.filter(**parametri).values())
+        res = dict()
+        res['poruke'] = poruke
+        return JsonResponse(res, safe=False)
+
+
+@csrf_exempt
+def postPoruku(request: HttpRequest):
+    if request.method == 'POST':
+        caskanje = {
+            'idkorisnik': Korisnik.objects.get(idkorisnik=request.POST['idkorisnik']),
+            'idzanatlija': Zanatlija.objects.get(idzanatlija=request.POST['idzanatlija']),
+            'smer': request.POST['smer'],
+            'poruka': request.POST['poruka'],
+            'datum_vreme': datetime.now(),
+        }
+
+        Caskanje.objects.create(**caskanje)
+        return HttpResponse(200)
+
+def unique(sequence):
+    seen = set()
+    return [x for x in sequence if not (x in seen or seen.add(x))]
+
+def chats(request):
+    korisnik = request.session['username']
+    user = None
+    type = None
+    chat_users = None
+    final_list = None
+    if user is None:
+        try:
+            user = Korisnik.objects.get(username=korisnik)
+            type = 'korisnik'
+        except:
+            user = None
+    if user is None:
+        try:
+            user = Zanatlija.objects.get(username=korisnik)
+            type = 'zanatlija'
+        except:
+            user = None
+
+    if type == 'korisnik':
+        chats = Caskanje.objects.filter(idkorisnik=user).all().order_by('-datum_vreme')
+        list_of_users = []
+        #unique_users = set(chat_users)
+        for chat in chats:
+            list_of_users.append(chat.idzanatlija)
+
+        #set_of_users = set(list_of_users)
+        final_list = unique(list_of_users)
+    elif type == 'zanatlija':
+        chats = Caskanje.objects.filter(idzanatlija=user).all().order_by('-datum_vreme')
+        list_of_users = []
+
+        for chat in chats:
+            list_of_users.append(chat.idkorisnik)
+        #print(list_of_users)
+        #set_of_users = set(list_of_users)
+        #print(set_of_users)
+        final_list = unique(list_of_users)
+
+    status = user.status
+
+    context = {
+        'korisnik': korisnik,
+        'status': status,
+        'chats': final_list
+    }
+
+    return render(request, 'chatsPrototip.html', context)
+
+
+def oceni(request):
+    oceni_button = request.POST.get("Oceni")
+
+    if oceni_button and request.method == "POST":
+        rater = request.session['username']
+        rated = request.session['neki_profil']
+        user_rater = None
+        user_rated = None
+        if user_rated is None:
+            try:
+                user_rated = Korisnik.objects.get(username__exact=rated)
+
+                if user_rated.ocena == 0 or user_rated.ocena == '' or user_rated.ocena is None:
+                    Korisnik.objects.filter(username__exact=rated).update(ocena=int(oceni_button), br_ocena=1)
+                else:
+                    nov_br_ocena = user_rated.br_ocena
+                    nov_br_ocena = nov_br_ocena + 1
+                    trenutna_ocena = user_rated.ocena
+                    nova_ocena = trenutna_ocena + int(oceni_button)
+                    nova_ocena /= nov_br_ocena
+                    Korisnik.objects.filter(username__exact=rated).update(ocena=nova_ocena, br_ocena=nov_br_ocena)
+            except Korisnik.DoesNotExist:
+                user_rated = None
+
+        if user_rated is None:
+            try:
+                user_rated = Zanatlija.objects.get(username__exact=rated)
+
+                if user_rated.ocena == 0 or user_rated.ocena == '' or user_rated.ocena is None:
+                    Zanatlija.objects.filter(username__exact=rated).update(ocena=int(oceni_button), br_ocena=1)
+                else:
+                    nov_br_ocena = user_rated.br_ocena
+                    nov_br_ocena = nov_br_ocena + 1
+                    trenutna_ocena = user_rated.ocena
+                    nova_ocena = trenutna_ocena + int(oceni_button)
+                    nova_ocena /= nov_br_ocena
+                    Zanatlija.objects.filter(username__exact=rated).update(ocena=nova_ocena, br_ocena=nov_br_ocena)
+            except:
+                user_rated = None
+
+        if user_rater is None:
+            try:
+                user_rater = Korisnik.objects.get(username__exact=rater)
+                # user_rater_id = Korisnik.objects.filter(username__exact=rater).values_list('idkorisnik').first()
+                # user_rated_id = Zanatlija.objects.filter(username__exact=rated).values_list('idzanatlija').first()
+                zapis_ocene = Ocene.objects.create(idkorisnik=user_rater, idzanatlija=user_rated,
+                                                   ocena=int(oceni_button), smer='K')
+                zapis_ocene.save()
+            except Korisnik.DoesNotExist:
+                user_rater = None
+
+        if user_rater is None:
+            try:
+                user_rater = Zanatlija.objects.get(username__exact=rater)
+                # user_rater_id = Zanatlija.objects.filter(username__exact=rater).values_list('idzanatlija').first()
+                # user_rated_id = Korisnik.objects.filter(username__exact=rated).values_list('idkorisnik').first()
+                zapis_ocene = Ocene.objects.create(idkorisnik=user_rated, idzanatlija=user_rater,
+                                                   ocena=int(oceni_button), smer='Z')
+                zapis_ocene.save()
+            except:
+                user_rater = None
+
+    return redirect(someones_profile, neki_profil=request.session['neki_profil'])
+
+
+def komentarisi(request):
+    komentar = request.POST.get('komentar')
+
+    if request.method == "POST" and request.POST.get("Komentarisi"):
+        if komentar != '':
+            commenter_username = request.session['username']
+            commented_username = request.session['neki_profil']
+
+            try:
+                commenter = Korisnik.objects.get(username__exact=commenter_username)
+                commented = Zanatlija.objects.get(username__exact=commented_username)
+
+                nov_komentar = Komentari.objects.create(idkorisnik=commenter, idzanatlija=commented, smer='K', komentar=komentar, datum_vreme=datetime.now())
+                nov_komentar.save()
+            except Korisnik.DoesNotExist:
+                commenter = None
+            try:
+                commenter = Zanatlija.objects.get(username__exact=commenter_username)
+                commented = Korisnik.objects.get(username__exact=commented_username)
+
+                nov_komentar = Komentari.objects.create(idkorisnik=commented, idzanatlija=commenter, smer='Z',
+                                                        komentar=komentar, datum_vreme=datetime.now())
+                nov_komentar.save()
+            except Zanatlija.DoesNotExist:
+                commenter = None
+
+            # nov_komentar = Komentari.objects.create()
+
+    return redirect(someones_profile, neki_profil=request.session['neki_profil'])

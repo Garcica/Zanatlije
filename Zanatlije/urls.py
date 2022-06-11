@@ -34,5 +34,12 @@ urlpatterns = [
     path('logout/', views.logout_req, name='logout'),
     path('self_delete/', views.self_delete_req, name='self_delete_req'),
     path('moderatorPanel/', views.moderator, name='moderatorPanel'),
-    path('search/', views.search, name='search')
+    path('search/', views.search, name='search'),
+    path('caskanja/<username>', views.caskanjeDetalj, name='caskanjeDetalj'),
+    path('poruka/', views.postPoruku, name='postPoruku'),
+    path('poruke/', views.poruke, name='poruke'),
+    path('chats/', views.chats, name='chats'),
+    path('oceni/', views.oceni, name='oceni'),
+    path('komentarisi/', views.komentarisi, name='komentarisi')
+    #path('saradnja', views.saradnja, name='saradnja')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

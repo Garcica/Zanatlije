@@ -17,10 +17,8 @@
     <!--NAVIGACIJA-->
     <div class="container-fluid py-1 navImg"></div>
     <nav class="navbar navbar-expand-sm bg-black p-0">
-        <a class="navbar-brand ms-1 me-0" href="searchPrototip.html">
-            {% load static %}
-            <img src="{% static 'slike/Logo.png' %}" alt="Logo.png" style="width:80px" title="Zanatlije">
-        </a>
+        {% load static %}
+        <img src="{% static 'slike/Logo.png' %}" alt="Logo.png" style="width:80px" title="Zanatlije">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a id="active" class="nav-link" href=" {% url 'login' %}">PRIJAVA</a>

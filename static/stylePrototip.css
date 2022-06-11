@@ -183,8 +183,8 @@ label.gray:hover {
     font-size: 30px;
 }
 
-.table>tbody>tr.no-border>td,
-.table>tbody>tr.no-border>th {
+.table > tbody > tr.no-border > td,
+.table > tbody > tr.no-border > th {
     border: none;
 }
 
@@ -205,6 +205,12 @@ label.gray:hover {
     color: black;
 }
 
+.col-background {
+    background-color: #fece00;
+    color: black;
+    border-radius: 10px;
+}
+
 .round {
     border-radius: 10px;
 }
@@ -219,6 +225,7 @@ label.gray:hover {
     border-color: purple;
     background-color: purple;
 }
+
 .modalButton {
     color: white;
     border-color: purple;
@@ -231,7 +238,7 @@ label.gray:hover {
     background-color: rgb(83, 0, 83);
 }
 
-.modalButton:visited , .modalButton:active , .modalButton:link{
+.modalButton:visited, .modalButton:active, .modalButton:link {
     color: white;
     border-color: purple;
     background-color: purple;
@@ -247,7 +254,7 @@ label.gray:hover {
     max-width: 78%;
 }
 
-.coms3 , .coms3:hover , .coms3:visited{
+.coms3, .coms3:hover, .coms3:visited {
     text-decoration: none;
     color: black;
     display: inline;
@@ -266,12 +273,13 @@ label.gray:hover {
     display: inline;
     margin-top: -1rem;
 }
-#formaZanatlije
-{
-    display: none; !important;
+
+#formaZanatlije {
+    display: none;
+!important;
     position: absolute;
 }
-.zanati
-{
+
+.zanati {
     display: none;
 }

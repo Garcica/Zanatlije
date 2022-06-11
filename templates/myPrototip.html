@@ -19,20 +19,14 @@
     <!--NAVIGACIJA-->
     <div class="container-fluid py-1 navImg"></div>
     <nav class="navbar navbar-expand-sm bg-black p-0">
-        <a class="navbar-brand ms-1 me-0" href="index.html"></a>
-        <a class="navbar-brand ms-1 me-0" href="searchPrototip.html">
-            {% load static %}
-            <img src="{% static 'slike/Logo.png' %}" alt="Logo.png" style="width:80px" title="Zanatlije">
-        </a>
+        {% load static %}
+        <img src="{% static 'slike/Logo.png' %}" alt="Logo.png" style="width:80px" title="Zanatlije">
         <ul class="navbar-nav">
             <li class="nav-right">
                 <a class="nav-link" href="{% url 'search' %}">PRETRAGA</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="jobsPrototip.html">SARADNJE</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="chatsPrototip.html">ĆASKANJA</a>
+                <a class="nav-link" href="{% url 'chats' %}">ĆASKANJA</a>
             </li>
             <li class="nav-right">
                 <a id="active" class="nav-link" href="{% url 'myprofile' korisnik %}">MOJ PROFIL</a>
@@ -62,7 +56,7 @@
     <!--OVO JE DISPLEJ PROFILA-->
     <div class="container">
         <div class="row round">
-            <div class="col-md-5">
+            <div class="col-md-5 mt-sm-3">
                 <div class="row">
                     <div class="col-12 p-0 px-3 py-3 mb-3 round">
                         <div class="d-flex flex-column align-items-center"> <img class="photo rounded-circle"
@@ -108,7 +102,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-7 ps-md-4">
+            <div class="col-md-7 ps-md-4 mt-sm-0 mb-sm-0">
                 <div class="row">
                     <div class="col-12 px-3 mb-3 pb-3 round">
                         <div class="d-flex align-items-center justify-content-between border-bottom">
@@ -123,11 +117,16 @@
                             <p class="py-2 fw-bold">Broj telefona</p>
                             <p class="py-2"> {{ tel }}</p>
                         </div>
-                        <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center justify-content-between border-bottom">
                             <p class="py-2 fw-bold">Opis</p>
                             <p class="py-2">{{ opis }}</p>
                         </div>
-
+                        {% if ocena %}
+                            <div class="d-flex align-items-center justify-content-between border-bottom">
+                            <p class="py-2 fw-bold">Ocena</p>
+                            <p class="py-2">{{ ocena }}/5</p>
+                        </div>
+                        {% endif %}
                         {% if logged_in_as %}
                         <div class="d-flex align-items-center justify-content-between border-bottom">
                             <p class="py-2 fw-bold">Naziv firme</p>
@@ -180,35 +179,29 @@
         </div>
         <!--OVO SU KOMENTARI-->
         <div class="row round">
-            <div class="alert alert-dark coms1" role="alert">
-                <a class="coms3" href="myPrototip.html">
-                    <p class="fw-bold"><img class="photo rounded-circle small" src="slike/Slika6.jpg" alt=""> &nbsp;
-                        jrtheplug</p>
-                </a>
-            </div>
-            <div class="alert alert-dark coms2" role="alert">
-                <p>Nenormalno zahtevan lik, nikako sa ovim covekom u nekakav posao</p>
-            </div>
-            <div class="alert alert-dark coms1" role="alert">
-                <a class="coms3" href="myPrototip.html">
-                    <p class="fw-bold"><img class="photo rounded-circle small" src="slike/Slika8.jpg" alt=""> &nbsp;
-                        micko13</p>
-                </a>
-            </div>
-            <div class="alert alert-dark coms2" role="alert">
-                <p>Mnogo dobar lik sve preporuke</p>
-            </div>
-            <div class="alert alert-dark coms1" role="alert">
-                <a class="coms3" href="myPrototip.html">
-                    <p class="fw-bold"><img class="photo rounded-circle small" src="slike/Slika5.jpg" alt=""> &nbsp;
-                        simibg89</p>
-                </a>
-            </div>
-            <div class="alert alert-dark coms2" role="alert">
-                <p>Ima dobru rakiju, gumene bombone nisam probao ali sve u svemu top lik</p>
-            </div>
-        </div>
-    </div>
+        {% for komentar in komentari %}
+            {% if logged_in_as %}
+                <div class="alert alert-dark coms1" role="alert">
+                    <a class="coms3" href="{% url 'someones_profile' komentar.idkorisnik.username %}">
+                        <p class="fw-bold"><img class="photo rounded-circle small"
+                                                src="{{ komentar.idkorisnik.put_do_slike }}" alt=""> &nbsp;
+                            {{ komentar.idkorisnik.username }} <br> {{ komentar.datum_vreme }}</p>
+                    </a>
+                </div>
+                <div class="alert alert-dark coms2" role="alert">
+                    <p>{{ komentar.komentar }}</p></div>
+            {% else %}
+                <div class="alert alert-dark coms1" role="alert">
+                    <a class="coms3" href="{% url 'someones_profile' komentar.idzanatlija.username %}">
+                        <p class="fw-bold"><img class="photo rounded-circle small"
+                                                src="{{ komentar.idzanatlija.put_do_slike }}" alt=""> &nbsp;
+                            {{ komentar.idzanatlija.username }} <br> {{ komentar.datum_vreme }}</p>
+                    </a>
+                </div>
+                <div class="alert alert-dark coms2" role="alert">
+                    <p>{{ komentar.komentar }}</p></div>
+            {% endif %}
+        {% endfor %}
 
     <!-- POPUP ALERT -->
     <div class="modal fade" id="obrisiAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
