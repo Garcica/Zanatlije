@@ -18,7 +18,8 @@ from django.utils.dateparse import parse_date
 from ZanatlijeApp.models import *
 import json
 
-
+#odobravanje
+#E-admin M-moderator A-odobren N-neodobren
 def admin_odobravanje(request):
     status = request.session['status']
     odobri_button = request.POST.get("Odobri")
