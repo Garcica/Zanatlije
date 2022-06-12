@@ -436,7 +436,7 @@ def register_req(request: HttpRequest):
                 slika_path = '../../media/korisnici_img/' + str(slika_ime)
                 user = Korisnik.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol,
                                                grad=grad, email=mail, telefon=phone, opis=desc, status="N",
-                                               put_do_slike=slika_path)
+                                               put_do_slike=slika_path, ocena=0.00, br_ocena=0)
                 user.slika.save(slika_ime, slika)
                 user.save()
             else:
@@ -444,7 +444,7 @@ def register_req(request: HttpRequest):
                 slika_path = '/static/slike/default.jpg'
                 user = Korisnik.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol,
                                                grad=grad, email=mail, telefon=phone, opis=desc, slika=None, status="N",
-                                               put_do_slike=slika_path)
+                                               put_do_slike=slika_path, ocena=0.00, br_ocena=0)
                 user.save()
             if slika_ime is None:
                 slika_ime = 'default.jpg'
@@ -460,7 +460,7 @@ def register_req(request: HttpRequest):
                 user = Zanatlija.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol,
                                                 grad=grad, email=mail, telefon=phone, opis=desc, status="N",
                                                 put_do_slike=slika_path, zanati=zanat, ime_firme=firma,
-                                                adresa_lokala=adresa)
+                                                adresa_lokala=adresa, ocena=0.00, br_ocena=0)
                 user.slika.save(slika_ime, slika)
                 user.save()
             else:
@@ -469,7 +469,7 @@ def register_req(request: HttpRequest):
                 user = Zanatlija.objects.create(username=username, sifra=password, ime=name, prezime=lastname, pol=pol,
                                                 grad=grad, email=mail, telefon=phone, opis=desc, slika=None, status="N",
                                                 put_do_slike=slika_path, zanati=zanat, ime_firme=firma,
-                                                adresa_lokala=adresa)
+                                                adresa_lokala=adresa, ocena=0.00, br_ocena=0)
                 user.save()
 
         error = 'Registracija je uspesna. Sacekajte da vam administrator/moderator odobri registraciju!'
@@ -1218,7 +1218,7 @@ def oceni(request):
             try:
                 user_rated = Korisnik.objects.get(username__exact=rated)
 
-                if user_rated.ocena == 0 or user_rated.ocena == '' or user_rated.ocena is None:
+                if user_rated.ocena == 0 or user_rated.ocena == '' or user_rated.ocena is None or user_rated.br_ocena == 0:
                     Korisnik.objects.filter(username__exact=rated).update(ocena=int(oceni_button), br_ocena=1)
                 else:
                     nov_br_ocena = user_rated.br_ocena
@@ -1234,7 +1234,7 @@ def oceni(request):
             try:
                 user_rated = Zanatlija.objects.get(username__exact=rated)
 
-                if user_rated.ocena == 0 or user_rated.ocena == '' or user_rated.ocena is None:
+                if user_rated.ocena == 0 or user_rated.ocena == '' or user_rated.ocena is None or user_rated.br_ocena == 0:
                     Zanatlija.objects.filter(username__exact=rated).update(ocena=int(oceni_button), br_ocena=1)
                 else:
                     nov_br_ocena = user_rated.br_ocena
@@ -1249,6 +1249,7 @@ def oceni(request):
         if user_rater is None:
             try:
                 user_rater = Korisnik.objects.get(username__exact=rater)
+                user_rated = Zanatlija.objects.get(username__exact=rated)
                 # user_rater_id = Korisnik.objects.filter(username__exact=rater).values_list('idkorisnik').first()
                 # user_rated_id = Zanatlija.objects.filter(username__exact=rated).values_list('idzanatlija').first()
                 zapis_ocene = Ocene.objects.create(idkorisnik=user_rater, idzanatlija=user_rated,
@@ -1260,6 +1261,7 @@ def oceni(request):
         if user_rater is None:
             try:
                 user_rater = Zanatlija.objects.get(username__exact=rater)
+                user_rated = Korisnik.objects.get(username__exact=rated)
                 # user_rater_id = Zanatlija.objects.filter(username__exact=rater).values_list('idzanatlija').first()
                 # user_rated_id = Korisnik.objects.filter(username__exact=rated).values_list('idkorisnik').first()
                 zapis_ocene = Ocene.objects.create(idkorisnik=user_rated, idzanatlija=user_rater,
